@@ -1,0 +1,26 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="56dp"
+    android:height="56dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Clean Slate Squircle -->
+    <path
+        android:fillColor="#1E293B"
+        android:pathData="M12,2C17.52,2 22,6.48 22,12s-4.48,10 -10,10S2,17.52 2,12 6.48,2 12,2z" />
+    <!-- Red Square -->
+    <path
+        android:fillColor="#F25022"
+        android:pathData="M6.5,6.5h5v5h-5z" />
+    <!-- Green Square -->
+    <path
+        android:fillColor="#7FBA00"
+        android:pathData="M12.5,6.5h5v5h-5z" />
+    <!-- Blue Square -->
+    <path
+        android:fillColor="#00A4EF"
+        android:pathData="M6.5,12.5h5v5h-5z" />
+    <!-- Yellow Square -->
+    <path
+        android:fillColor="#FFB900"
+        android:pathData="M12.5,12.5h5v5h-5z" />
+</vector>

@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="56dp"
+    android:height="56dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Nokia Royal Blue Squircle -->
+    <path
+        android:fillColor="#124191"
+        android:pathData="M12,2C17.52,2 22,6.48 22,12s-4.48,10 -10,10S2,17.52 2,12 6.48,2 12,2z" />
+    <!-- Letter N Left Stem -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M6.5,7.5h2.2v9H6.5z" />
+    <!-- Letter N Diagonal -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M8.7,7.5l6.5,9h2.3v-9h-2.2v9L8.7,7.5z" />
+</vector>

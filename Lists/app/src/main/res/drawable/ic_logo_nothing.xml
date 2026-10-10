@@ -1,0 +1,26 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="56dp"
+    android:height="56dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Pure Matte Black Squircle -->
+    <path
+        android:fillColor="#121212"
+        android:pathData="M12,2C17.52,2 22,6.48 22,12s-4.48,10 -10,10S2,17.52 2,12 6.48,2 12,2z" />
+    <!-- Glyph Curved Arc Light strip -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M14.5,6.5c2.5,0 4.5,2 4.5,4.5s-0.7,3 -1.8,3.8l-1,-1.2c0.8,-0.6 1.3,-1.5 1.3,-2.6 0,-1.7 -1.3,-3 -3,-3h-4V6.5h4z" />
+    <!-- Glyph Center Line -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M6,12h5v1.5H6z" />
+    <!-- Glyph Bottom Diagonal Strip -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M11,15.5h4.5v1.5H11z" />
+    <!-- Dot Matrix Accent Dot -->
+    <path
+        android:fillColor="#EF4444"
+        android:pathData="M17.5,16m-0.8,0a0.8,0.8 0,1 1,1.6 0a0.8,0.8 0,1 1,-1.6 0" />
+</vector>

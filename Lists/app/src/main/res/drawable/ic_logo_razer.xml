@@ -1,0 +1,25 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="56dp"
+    android:height="56dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Razer Stealth Black Squircle -->
+    <path
+        android:fillColor="#0A0A0A"
+        android:pathData="M12,2C17.52,2 22,6.48 22,12s-4.48,10 -10,10S2,17.52 2,12 6.48,2 12,2z" />
+    <!-- Razer Tri-Snake Head Top -->
+    <path
+        android:fillColor="#00FF00"
+        android:pathData="M12,4.5l-1.5,2.5 1.5,1.5 1.5,-1.5z" />
+    <!-- Razer Center Body Intertwine -->
+    <path
+        android:fillColor="#00FF00"
+        android:pathData="M11.3,9.2C10.5,8.8 8.5,8 6.5,10.2c-1.8,2 0.2,4.3 1.8,3.2 0.8,-0.6 1.4,-1.8 1.4,-2.8 0,-0.4 0.5,-1 1.6,-1.4z" />
+    <path
+        android:fillColor="#00FF00"
+        android:pathData="M12.7,9.2c0.8,-0.4 2.8,-1.2 4.8,1 1.8,2 -0.2,4.3 -1.8,3.2 -0.8,-0.6 -1.4,-1.8 -1.4,-2.8 0,-0.4 -0.5,-1 -1.6,-1.4z" />
+    <!-- Bottom Snake Body -->
+    <path
+        android:fillColor="#00FF00"
+        android:pathData="M12,12.5l-2.2,3.8c-0.6,1.1 0.2,2.2 1.4,2.2h1.6c1.2,0 2,-1.1 1.4,-2.2L12,12.5z" />
+</vector>

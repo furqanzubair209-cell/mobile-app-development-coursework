@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Lists</string>
+    <string name="title_lists">Tech Gadgets</string>
+    <string name="app_badge">FLAGSHIP EDITION 2024</string>
+    <string name="app_subtitle">Android Lists &amp; RecyclerView Showcase</string>
+    <string name="app_description">Compare two fundamental Android list architectures rendered with Material 3 styling and authentic brand logos.</string>
+
+    <string name="badge_list_view">CLASSIC ADAPTER</string>
+    <string name="btn_list_view">ListView Architecture</string>
+    <string name="desc_list_view">Classic Android ListView utilizing custom ArrayAdapter with recycled ViewHolder pattern and lightweight memory footprint.</string>
+    <string name="action_explore_list">Explore ListView →</string>
+
+    <string name="badge_recycler_view">ENHANCED MATERIAL 3</string>
+    <string name="btn_recycler_view">RecyclerView Architecture</string>
+    <string name="desc_recycler_view">Modern RecyclerView with gradient showcase headers, smooth recycling mechanics, and rich hardware spec chips.</string>
+    <string name="action_explore_recycler">Explore RecyclerView →</string>
+
+    <string name="desc_phone_image">Gadget Logo</string>
+    <string name="desc_country_image">Country Flag</string>
+    <string name="desc_fruit_image">Fruit Image</string>
+    <string name="desc_student_image">Student Image</string>
+
+    <string name="title_list_view_activity">ListView Catalog</string>
+    <string name="title_recycler_view_activity">RecyclerView Showcase</string>
+    <string name="subtitle_device_count">20 Flagship Devices</string>
+
+    <string name="label_flagship_series">✦ Flagship Series</string>
+    <string name="label_specs_overview">Specs Overview →</string>
+    <string name="action_back">Navigate Back</string>
+</resources>

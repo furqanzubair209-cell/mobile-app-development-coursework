@@ -1,0 +1,28 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme (Dark Mode) -->
+    <style name="Base.Theme.Lists" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary & Secondary Accent -->
+        <item name="colorPrimary">@color/primary_indigo_light</item>
+        <item name="colorOnPrimary">#0B0F19</item>
+        <item name="colorPrimaryContainer">@color/surface_dark</item>
+        <item name="colorOnPrimaryContainer">@color/primary_indigo_light</item>
+        <item name="colorSecondary">@color/accent_cyan</item>
+        <item name="colorOnSecondary">#0B0F19</item>
+
+        <!-- Background & Surface -->
+        <item name="android:colorBackground">@color/bg_dark</item>
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorSurfaceVariant">@color/surface_variant_dark</item>
+        <item name="colorOnSurface">@color/text_primary_dark</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary_dark</item>
+        <item name="colorOutline">@color/outline_dark</item>
+
+        <!-- Status Bar & Navigation Bar -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/bg_dark</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+    </style>
+
+    <style name="Theme.Lists" parent="Base.Theme.Lists" />
+</resources>

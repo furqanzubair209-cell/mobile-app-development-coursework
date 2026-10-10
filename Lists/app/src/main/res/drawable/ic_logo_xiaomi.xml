@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="56dp"
+    android:height="56dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Xiaomi Orange Squircle -->
+    <path
+        android:fillColor="#FF6900"
+        android:pathData="M12,2C17.52,2 22,6.48 22,12s-4.48,10 -10,10S2,17.52 2,12 6.48,2 12,2z" />
+    <!-- Authentic 'mi' emblem -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M7,8h2.2v8H7V8z M10.4,8h3.8c1.3,0 2.2,0.9 2.2,2.2V16h-2.1v-5.2c0,-0.4 -0.3,-0.7 -0.7,-0.7h-1.2V16h-2V8z M15.8,10.6h1.5V16h-1.5v-5.4z" />
+</vector>

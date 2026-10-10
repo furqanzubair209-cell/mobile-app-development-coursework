@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand Primary Colors (Electric Indigo & Violet) -->
+    <color name="primary_indigo">#6366F1</color>
+    <color name="primary_indigo_dark">#4F46E5</color>
+    <color name="primary_indigo_light">#818CF8</color>
+    <color name="primary_container">#EEF2FF</color>
+    <color name="on_primary_container">#312E81</color>
+    <color name="primary_gradient_start">#6366F1</color>
+    <color name="primary_gradient_end">#4338CA</color>
+
+    <!-- Secondary & Accent Colors -->
+    <color name="accent_cyan">#06B6D4</color>
+    <color name="accent_cyan_light">#E0F2FE</color>
+    <color name="accent_amber">#F59E0B</color>
+    <color name="accent_amber_light">#FEF3C7</color>
+    <color name="accent_emerald">#10B981</color>
+    <color name="accent_emerald_light">#D1FAE5</color>
+    <color name="accent_purple">#8B5CF6</color>
+    <color name="accent_purple_light">#EDE9FE</color>
+
+    <!-- Surface & Backgrounds (Light) -->
+    <color name="bg_light">#F8FAFC</color>
+    <color name="surface_light">#FFFFFF</color>
+    <color name="surface_variant_light">#F1F5F9</color>
+    <color name="text_primary_light">#0F172A</color>
+    <color name="text_secondary_light">#475569</color>
+    <color name="text_tertiary_light">#94A3B8</color>
+    <color name="outline_light">#E2E8F0</color>
+    <color name="badge_bg_light">#EEF2FF</color>
+    <color name="badge_stroke_light">#C7D2FE</color>
+
+    <!-- Surface & Backgrounds (Dark) -->
+    <color name="bg_dark">#0B0F19</color>
+    <color name="surface_dark">#151D2C</color>
+    <color name="surface_variant_dark">#1E293B</color>
+    <color name="text_primary_dark">#F8FAFC</color>
+    <color name="text_secondary_dark">#94A3B8</color>
+    <color name="text_tertiary_dark">#64748B</color>
+    <color name="outline_dark">#243044</color>
+    <color name="badge_bg_dark">#1E2238</color>
+    <color name="badge_stroke_dark">#3730A3</color>
+
+    <!-- Card Gradient Overlays -->
+    <color name="card_gradient_start">#312E81</color>
+    <color name="card_gradient_end">#1E1B4B</color>
+</resources>

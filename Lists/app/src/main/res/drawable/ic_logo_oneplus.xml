@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="56dp"
+    android:height="56dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- OnePlus Crimson Red Squircle -->
+    <path
+        android:fillColor="#EB0029"
+        android:pathData="M12,2C17.52,2 22,6.48 22,12s-4.48,10 -10,10S2,17.52 2,12 6.48,2 12,2z" />
+    <!-- Square Badge with 1 and + -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M6.5,6.5h11v11h-11zM8,8v8h8V8z" />
+    <!-- Number 1 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M10.2,9.6l0.9,-0.6h1.1v6h-1.6v-4.3l-0.7,0.4z" />
+    <!-- Plus symbol in corner -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M15.5,10.5h1.2v-1.2h0.9v1.2h1.2v0.9h-1.2v1.2h-0.9v-1.2h-1.2z" />
+</vector>
