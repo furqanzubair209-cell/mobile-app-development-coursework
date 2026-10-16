@@ -23,13 +23,6 @@
 **Three standalone Android Studio projects, one repository.**
 From a Compose starter, to a ListView vs RecyclerView showdown, to a full multi-screen food-delivery app.
 
-[Projects](#-projects-at-a-glance) •
-[Foodie](#-foodie--food-delivery-app) •
-[Lists](#-lists--listview-vs-recyclerview) •
-[MyApplication](#-myapplication--jetpack-compose-starter) •
-[Getting Started](#-getting-started) •
-[Author](#-author)
-
 </div>
 
 ---
@@ -42,9 +35,9 @@ The projects are deliberately arranged as a progression:
 
 | Stage | What it teaches | Project |
 |:-:|---|---|
-| 🟢 **1** | Project setup, modern declarative UI with Compose | [MyApplication](#-myapplication--jetpack-compose-starter) |
-| 🔵 **2** | Displaying collections: `ListView` vs `RecyclerView`, custom adapters, data models | [Lists](#-lists--listview-vs-recyclerview) |
-| 🔴 **3** | A complete app: navigation, state, adapters, validation, singletons, sample data | [Foodie](#-foodie--food-delivery-app) |
+| 🟢 **1** | Project setup, modern declarative UI with Compose | **MyApplication** |
+| 🔵 **2** | Displaying collections: `ListView` vs `RecyclerView`, custom adapters, data models | **Lists** |
+| 🔴 **3** | A complete app: navigation, state, adapters, validation, singletons, sample data | **Foodie** |
 
 ---
 
@@ -61,7 +54,7 @@ The projects are deliberately arranged as a progression:
 
 12 screens · 6 restaurants · 24 dishes · live search · working cart and order flow.
 
-[➜ Jump to details](#-foodie--food-delivery-app)
+Best for seeing how screens, state and data come together in one app.
 
 </td>
 <td width="33%" valign="top">
@@ -73,7 +66,7 @@ The projects are deliberately arranged as a progression:
 
 20 flagship smartphones shown two ways, side by side, with brand logos and ratings.
 
-[➜ Jump to details](#-lists--listview-vs-recyclerview)
+Best for understanding how the two list approaches differ in practice.
 
 </td>
 <td width="33%" valign="top">
@@ -85,7 +78,7 @@ The projects are deliberately arranged as a progression:
 
 Edge-to-edge Compose scaffold with a themed Material 3 setup.
 
-[➜ Jump to details](#-myapplication--jetpack-compose-starter)
+Best for seeing the modern declarative way to build Android UI.
 
 </td>
 </tr>
@@ -93,9 +86,9 @@ Edge-to-edge Compose scaffold with a themed Material 3 setup.
 
 | Folder | Language | UI Toolkit | Package | Highlights |
 |---|---|---|---|---|
-| [`Foodapp`](./Foodapp) | Java | XML + Material Components | `com.example.foodapp` | Multi-activity navigation, cart singleton, order flow |
-| [`Lists`](./Lists) | Java | XML + Material Components | `com.example.lists` | Two adapters, one dataset, direct comparison |
-| [`MyApplication`](./MyApplication) | Kotlin | Jetpack Compose | `com.example.myapplication` | Compose + Material 3 theming, edge-to-edge |
+| `Foodapp` | Java | XML + Material Components | `com.example.foodapp` | Multi-activity navigation, cart singleton, order flow |
+| `Lists` | Java | XML + Material Components | `com.example.lists` | Two adapters, one dataset, direct comparison |
+| `MyApplication` | Kotlin | Jetpack Compose | `com.example.myapplication` | Compose + Material 3 theming, edge-to-edge |
 
 ---
 
@@ -357,12 +350,12 @@ git clone https://github.com/furqanzubair209-cell/mobile-app-development-coursew
 
 <div align="center">
 
-**Muhammad Furqan**
+**Muhammad Furqan**  
 Computer Science Student · The Superior University, Lahore
 
-[![GitHub](https://img.shields.io/badge/GitHub-furqanzubair209--cell-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/furqanzubair209-cell)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-muhammad--furqan-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/muhammad-furqan-228807304)
-[![Portfolio](https://img.shields.io/badge/Portfolio-furqannewportfolio-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://furqannewportfolio.netlify.app)
+**GitHub:** [furqanzubair209-cell](https://github.com/furqanzubair209-cell) — source code for coursework, personal projects and experiments.  
+**LinkedIn:** [muhammad-furqan-228807304](https://www.linkedin.com/in/muhammad-furqan-228807304) — professional profile, certificates and project updates.  
+**Portfolio:** [furqannewportfolio.netlify.app](https://furqannewportfolio.netlify.app) — 28 projects across frontend, AI/ML and automation.
 
 <br/>
 
