@@ -11,6 +11,7 @@ public class CartManager {
     private final List<CartItem> cartItems = new ArrayList<>();
     private final List<OnCartChangeListener> listeners = new ArrayList<>();
     private static final double DEFAULT_DELIVERY_FEE = 2.49;
+    private String appliedVoucher = null;
 
     public interface OnCartChangeListener {
         void onCartChanged();
@@ -83,6 +84,7 @@ public class CartManager {
 
     public void clearCart() {
         cartItems.clear();
+        appliedVoucher = null;
         notifyListeners();
     }
 
@@ -103,10 +105,60 @@ public class CartManager {
     }
 
     public double getDeliveryFee() {
-        return cartItems.isEmpty() ? 0.0 : DEFAULT_DELIVERY_FEE;
+        if (cartItems.isEmpty()) return 0.0;
+        // FREEDEL voucher makes delivery free
+        if ("FREEDEL".equals(appliedVoucher)) {
+            return 0.0;
+        }
+        return DEFAULT_DELIVERY_FEE;
+    }
+
+    // Voucher system
+    public void applyVoucher(String voucherCode) {
+        this.appliedVoucher = voucherCode;
+        notifyListeners();
+    }
+
+    public void removeVoucher() {
+        this.appliedVoucher = null;
+        notifyListeners();
+    }
+
+    public String getAppliedVoucher() {
+        return appliedVoucher;
+    }
+
+    public double getVoucherDiscount() {
+        if (appliedVoucher == null || cartItems.isEmpty()) return 0.0;
+        double subtotal = getSubtotal();
+
+        switch (appliedVoucher) {
+            case "FOODIE50":
+                // 50% off the subtotal
+                return subtotal * 0.50;
+            case "FREEDEL":
+                // Free delivery - discount is the delivery fee amount
+                return DEFAULT_DELIVERY_FEE;
+            case "BURGER20":
+                // 20% off the subtotal
+                return subtotal * 0.20;
+            default:
+                return 0.0;
+        }
     }
 
     public double getTotal() {
-        return getSubtotal() + getDeliveryFee();
+        double subtotal = getSubtotal();
+        double deliveryFee = getDeliveryFee();
+        double discount = getVoucherDiscount();
+
+        // For FREEDEL, discount is already applied via getDeliveryFee() returning 0
+        // So we only subtract discount for non-FREEDEL vouchers
+        if ("FREEDEL".equals(appliedVoucher)) {
+            return subtotal + deliveryFee;
+        }
+
+        double total = subtotal + deliveryFee - discount;
+        return Math.max(0, total); // Never go below 0
     }
 }
