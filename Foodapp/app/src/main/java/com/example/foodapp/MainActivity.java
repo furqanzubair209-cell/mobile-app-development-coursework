@@ -1,166 +1,136 @@
 package com.example.foodapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
 
-import com.example.foodapp.adapter.PopularFoodAdapter;
-import com.example.foodapp.adapter.RestaurantAdapter;
 import com.example.foodapp.data.CartManager;
-import com.example.foodapp.data.SampleData;
-import com.example.foodapp.model.FoodItem;
-import com.example.foodapp.model.Restaurant;
-import com.google.android.material.card.MaterialCardView;
-
-import java.util.List;
+import com.example.foodapp.fragment.CartFragment;
+import com.example.foodapp.fragment.FavoritesFragment;
+import com.example.foodapp.fragment.HomeFragment;
+import com.example.foodapp.fragment.OffersFragment;
+import com.example.foodapp.fragment.OrdersFragment;
+import com.example.foodapp.fragment.ProfileFragment;
+import com.example.foodapp.fragment.RestaurantsFragment;
+import com.example.foodapp.fragment.SearchFragment;
 
 public class MainActivity extends AppCompatActivity implements CartManager.OnCartChangeListener {
 
+    public static final int TAB_COUNT = 8;
+    private final TextView[] tabViews = new TextView[TAB_COUNT];
+    private int currentTab = 0;
+    private HorizontalScrollView tabScrollView;
     private TextView tvCartBadge;
+
+    private final String[] tabLabels = {
+        "\uD83C\uDFE0 Home", "\uD83C\uDF7D Restaurants", "\uD83D\uDD0D Search", "\uD83C\uDF81 Offers",
+        "\uD83D\uDED2 Cart", "\uD83D\uDCCB Orders", "\u2764 Favorites", "\uD83D\uDC64 Profile"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 1. Cart Header Button and Badge
+        // Header Cart Button & Badge
         tvCartBadge = findViewById(R.id.tvCartBadge);
         FrameLayout btnCartHeader = findViewById(R.id.btnCartHeader);
         if (btnCartHeader != null) {
-            btnCartHeader.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
+            btnCartHeader.setOnClickListener(v -> navigateToFragment(4)); // Go to Cart Fragment
         }
 
-        // 2. Search Bar Clickable
-        LinearLayout searchBarClickable = findViewById(R.id.searchBarClickable);
-        if (searchBarClickable != null) {
-            searchBarClickable.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SearchActivity.class)));
+        tabScrollView = findViewById(R.id.tabScrollView);
+        LinearLayout tabContainer = findViewById(R.id.tabContainer);
+
+        // Dynamically create 8 tab pills
+        for (int i = 0; i < TAB_COUNT; i++) {
+            final int tabIndex = i;
+            TextView tab = new TextView(this);
+            tab.setText(tabLabels[i]);
+            tab.setTextSize(13);
+            tab.setPadding(dp(16), dp(10), dp(16), dp(10));
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(dp(4), dp(4), dp(4), dp(4));
+            tab.setLayoutParams(params);
+
+            tab.setOnClickListener(v -> navigateToFragment(tabIndex));
+
+            tabContainer.addView(tab);
+            tabViews[i] = tab;
         }
 
-        // 3. Navigation Grid (6 cards)
-        MaterialCardView cardNavHome = findViewById(R.id.cardNavHome);
-        if (cardNavHome != null) {
-            cardNavHome.setOnClickListener(v -> Toast.makeText(MainActivity.this, "You are on Home screen", Toast.LENGTH_SHORT).show());
+        // Listen for Cart updates to keep badge in sync
+        CartManager.getInstance().addListener(this);
+        updateCartBadge();
+
+        // Load default fragment
+        if (savedInstanceState == null) {
+            navigateToFragment(0);
         }
+    }
 
-        MaterialCardView cardNavRestaurants = findViewById(R.id.cardNavRestaurants);
-        if (cardNavRestaurants != null) {
-            cardNavRestaurants.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, RestaurantsActivity.class)));
+    public void navigateToFragment(int index) {
+        if (index < 0 || index >= TAB_COUNT) return;
+
+        Fragment fragment = getFragmentForIndex(index);
+        if (fragment == null) return;
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .commit();
+
+        updateTabStyles(index);
+        currentTab = index;
+
+        // Auto-scroll the pill into viewport smoothly
+        if (tabScrollView != null && tabViews[index] != null) {
+            tabScrollView.post(() -> {
+                int scrollX = tabViews[index].getLeft() - dp(16);
+                tabScrollView.smoothScrollTo(Math.max(0, scrollX), 0);
+            });
         }
+    }
 
-        MaterialCardView cardNavSearch = findViewById(R.id.cardNavSearch);
-        if (cardNavSearch != null) {
-            cardNavSearch.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SearchActivity.class)));
+    private Fragment getFragmentForIndex(int index) {
+        switch (index) {
+            case 0: return new HomeFragment();
+            case 1: return new RestaurantsFragment();
+            case 2: return new SearchFragment();
+            case 3: return new OffersFragment();
+            case 4: return new CartFragment();
+            case 5: return new OrdersFragment();
+            case 6: return new FavoritesFragment();
+            case 7: return new ProfileFragment();
+            default: return null;
         }
+    }
 
-        MaterialCardView cardNavOffers = findViewById(R.id.cardNavOffers);
-        if (cardNavOffers != null) {
-            cardNavOffers.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, OffersActivity.class)));
-        }
+    private void updateTabStyles(int selectedIndex) {
+        for (int i = 0; i < TAB_COUNT; i++) {
+            TextView tab = tabViews[i];
+            if (tab == null) continue;
 
-        MaterialCardView cardNavOrders = findViewById(R.id.cardNavOrders);
-        if (cardNavOrders != null) {
-            cardNavOrders.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, OrdersActivity.class)));
-        }
-
-        MaterialCardView cardNavProfile = findViewById(R.id.cardNavProfile);
-        if (cardNavProfile != null) {
-            cardNavProfile.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ProfileActivity.class)));
-        }
-
-        // 4. Category Clicks (Pizza, Burgers, Sushi, Noodles, Desserts, Drinks)
-        View.OnClickListener categoryClickListener = v -> {
-            String category = "Pizza";
-            int vId = v.getId();
-            if (vId == R.id.catPizza) category = "Pizza";
-            else if (vId == R.id.catBurgers) category = "Burgers";
-            else if (vId == R.id.catSushi) category = "Sushi";
-            else if (vId == R.id.catNoodles) category = "Noodles";
-            else if (vId == R.id.catDesserts) category = "Desserts";
-            else if (vId == R.id.catDrinks) category = "Drinks";
-
-            Intent intent = new Intent(MainActivity.this, RestaurantsActivity.class);
-            intent.putExtra("category", category);
-            startActivity(intent);
-        };
-        int[] categoryIds = {
-            R.id.catPizza,
-            R.id.catBurgers,
-            R.id.catSushi,
-            R.id.catNoodles,
-            R.id.catDesserts,
-            R.id.catDrinks
-        };
-        for (int id : categoryIds) {
-            View catView = findViewById(id);
-            if (catView != null) {
-                catView.setOnClickListener(categoryClickListener);
+            if (i == selectedIndex) {
+                tab.setBackgroundResource(R.drawable.bg_tab_selected);
+                tab.setTextColor(getResources().getColor(R.color.white, null));
+                tab.setTypeface(null, android.graphics.Typeface.BOLD);
+            } else {
+                tab.setBackgroundResource(R.drawable.bg_tab_unselected);
+                tab.setTextColor(getResources().getColor(R.color.text_primary, null));
+                tab.setTypeface(null, android.graphics.Typeface.BOLD);
             }
         }
-
-        // 5. Promotional Banner Button
-        Button btnClaimOffer = findViewById(R.id.btnClaimOffer);
-        if (btnClaimOffer != null) {
-            btnClaimOffer.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, OffersActivity.class)));
-        }
-
-        // 8 & 9. Popular Dishes Section (Horizontal RecyclerView, first 8 food items)
-        View btnSeeAllProducts = findViewById(R.id.btnSeeAllProducts);
-        if (btnSeeAllProducts != null) {
-            btnSeeAllProducts.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SearchActivity.class)));
-        }
-
-        RecyclerView rvPopular = findViewById(R.id.rvPopularProducts);
-        if (rvPopular != null) {
-            rvPopular.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-            List<FoodItem> allFood = SampleData.getAllFoodItems();
-            List<FoodItem> popularDishes = allFood.subList(0, Math.min(8, allFood.size()));
-            PopularFoodAdapter popularAdapter = new PopularFoodAdapter(popularDishes, new PopularFoodAdapter.OnPopularFoodClickListener() {
-                @Override
-                public void onFoodClick(FoodItem foodItem) {
-                    Intent intent = new Intent(MainActivity.this, FoodDetailsActivity.class);
-                    intent.putExtra("foodItem", foodItem);
-                    startActivity(intent);
-                }
-
-                @Override
-                public void onQuickAddClick(FoodItem foodItem) {
-                    CartManager.getInstance().addItem(foodItem, 1);
-                    Toast.makeText(MainActivity.this, foodItem.getName() + " added to cart!", Toast.LENGTH_SHORT).show();
-                }
-            });
-            rvPopular.setAdapter(popularAdapter);
-        }
-
-        // 6 & 7. Featured Restaurants Section (Vertical RecyclerView, first 4 restaurants)
-        View btnSeeAllRestaurants = findViewById(R.id.btnSeeAllRestaurants);
-        if (btnSeeAllRestaurants != null) {
-            btnSeeAllRestaurants.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, RestaurantsActivity.class)));
-        }
-
-        RecyclerView rvFeatured = findViewById(R.id.rvFeaturedRestaurants);
-        if (rvFeatured != null) {
-            rvFeatured.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-            List<Restaurant> allRestaurants = SampleData.getRestaurants();
-            List<Restaurant> featuredRestaurants = allRestaurants.subList(0, Math.min(4, allRestaurants.size()));
-            RestaurantAdapter restaurantAdapter = new RestaurantAdapter(featuredRestaurants, restaurant -> {
-                Intent intent = new Intent(MainActivity.this, RestaurantDetailsActivity.class);
-                intent.putExtra("restaurant", restaurant);
-                startActivity(intent);
-            });
-            rvFeatured.setAdapter(restaurantAdapter);
-        }
-
-        // 10. Register CartManager listener
-        CartManager.getInstance().addListener(this);
     }
 
     @Override
@@ -177,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements CartManager.OnCar
 
     @Override
     public void onCartChanged() {
-        updateCartBadge();
+        runOnUiThread(this::updateCartBadge);
     }
 
     private void updateCartBadge() {
@@ -189,5 +159,9 @@ public class MainActivity extends AppCompatActivity implements CartManager.OnCar
         } else {
             tvCartBadge.setVisibility(View.GONE);
         }
+    }
+
+    private int dp(int value) {
+        return (int) (value * getResources().getDisplayMetrics().density);
     }
 }
