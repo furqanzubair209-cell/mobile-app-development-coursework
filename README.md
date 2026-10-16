@@ -21,7 +21,7 @@
 ![Repo Size](https://img.shields.io/github/repo-size/furqanzubair209-cell/mobile-app-development-coursework?style=flat-square&color=orange)
 
 **Three standalone Android Studio projects, one repository.**
-From a Compose starter, to a ListView vs RecyclerView showdown, to a full multi-screen food-delivery app.
+From a Compose starter, to a ListView vs RecyclerView showdown, to a full fragment-based food-delivery app with a working voucher system.
 
 </div>
 
@@ -37,7 +37,7 @@ The projects are deliberately arranged as a progression:
 |:-:|---|---|
 | 🟢 **1** | Project setup, modern declarative UI with Compose | **MyApplication** |
 | 🔵 **2** | Displaying collections: `ListView` vs `RecyclerView`, custom adapters, data models | **Lists** |
-| 🔴 **3** | A complete app: navigation, state, adapters, validation, singletons, sample data | **Foodie** |
+| 🔴 **3** | A complete app: auth flow, fragment navigation, shared state, vouchers, adapters, sample data | **Foodie** |
 
 ---
 
@@ -50,11 +50,11 @@ The projects are deliberately arranged as a progression:
 ### 🍔 Foodie
 **Food-delivery app**
 
-`Java` `XML` `Material` `RecyclerView`
+`Java` `XML` `Material` `Fragments` `RecyclerView`
 
-12 screens · 6 restaurants · 24 dishes · live search · working cart and order flow.
+8-tab fragment UI · 6 restaurants · 24 dishes · live search · voucher engine · working cart and order flow.
 
-Best for seeing how screens, state and data come together in one app.
+Best for seeing how screens, shared state and data come together in one app.
 
 </td>
 <td width="33%" valign="top">
@@ -86,7 +86,7 @@ Best for seeing the modern declarative way to build Android UI.
 
 | Folder | Language | UI Toolkit | Package | Highlights |
 |---|---|---|---|---|
-| `Foodapp` | Java | XML + Material Components | `com.example.foodapp` | Multi-activity navigation, cart singleton, order flow |
+| `Foodapp` | Java | XML + Material Components | `com.example.foodapp` | Login-first flow, 8-tab fragment shell, cart singleton, vouchers |
 | `Lists` | Java | XML + Material Components | `com.example.lists` | Two adapters, one dataset, direct comparison |
 | `MyApplication` | Kotlin | Jetpack Compose | `com.example.myapplication` | Compose + Material 3 theming, edge-to-edge |
 
@@ -94,70 +94,105 @@ Best for seeing the modern declarative way to build Android UI.
 
 ## 🍔 Foodie — Food Delivery App
 
-> A Foodpanda-inspired ordering app with a pink brand palette, built entirely with Java, XML layouts and Material Components. All data is local sample data, so it runs with **no backend and no API keys**.
+> A Foodpanda-inspired ordering app with a pink brand palette, built entirely with Java, XML layouts and Material Components. The app opens on a login screen, then drops into a **tabbed, fragment-based home shell** where browsing, searching, offers, cart, orders, favorites and profile all live one tap apart. All data is local sample data, so it runs with **no backend and no API keys**.
 
 ### 🎯 Features
 
-- 🚀 **Splash screen** with a timed hand-off into the app
-- 🔐 **Login and Sign-up** screens using Material `TextInputLayout`, with inline field validation (required email, `@` check, minimum password length)
-- 🏠 **Home dashboard** with delivery address, search bar, promo banner, category shortcuts (Pizza, Burgers, Sushi, Noodles, Desserts, Drinks) and a six-tile navigation grid
-- 🔥 **Popular dishes** in a horizontal `RecyclerView` and **featured restaurants** in a vertical one
+- 🚀 **Splash screen** with a timed hand-off straight into the **Login** screen
+- 🔐 **Login and Sign-up** screens using Material `TextInputLayout`, scrollable on small screens, with inline validation (required fields, `@` check, minimum 4-character password, password confirmation on sign-up)
+- 🧭 **8-tab fragment shell**: Home, Restaurants, Search, Offers, Cart, Orders, Favorites and Profile, in a scrollable pill tab bar that auto-centers the selected tab
+- 🏠 **Home tab** with delivery address, search bar, promo banner, category shortcuts (Pizza, Burgers, Sushi, Noodles, Desserts, Drinks), popular dishes and featured restaurants
+- 🛍️ **Live cart badge** in the header that updates instantly from anywhere in the app
 - 🔍 **Live search** that filters every dish by name, description and category as you type
 - 🏪 **Restaurant browsing and detail pages** with menu items, ratings, delivery time, fee and price tier
 - 🍽️ **Food detail page** with quantity selection and add-to-cart
-- 🛒 **Shopping cart** with quantity controls, remove and clear, plus live subtotal, delivery fee and total
-- 📦 **Order placement** that pushes a new order into history, with a confirmation dialog
+- 🛒 **Shopping cart** with quantity controls, remove and clear, plus live subtotal, delivery fee, voucher discount and total
+- 🎟️ **Working voucher engine**: apply a code on the Offers tab and the Cart tab recalculates immediately
+- 📦 **Order placement** that adds a new order to history and jumps to the Orders tab from a confirmation dialog
 - 🔁 **Order history** with status chips and one-tap **reorder**
-- 🎟️ **Offers page** with voucher cards (`FOODIE50`, `FREEDEL`, `BURGER20`)
-- 👤 **Profile page** with addresses, payment shortcut, orders link and a logout that clears the back stack
+- ❤️ **Favorites tab** with a curated list of top dishes, quick-add and detail navigation
+- 👤 **Profile tab** with addresses, payment shortcut, orders link and a logout that clears the back stack
+
+### 🎟️ Voucher Engine
+
+Vouchers are applied through the shared `CartManager`, so every screen sees the same discount.
+
+| Code | Effect | How it is calculated |
+|---|---|---|
+| `FOODIE50` | **50% off** the subtotal | `subtotal × 0.50` |
+| `BURGER20` | **20% off** the subtotal | `subtotal × 0.20` |
+| `FREEDEL` | **Free delivery** | Delivery fee drops from `$2.49` to `$0.00` |
+
+- The Offers tab shows an applied voucher as **"✓ CODE Applied"** and disables the button, and restores that state when you come back.
+- The Cart tab shows a dedicated discount row only when a voucher is active.
+- The total is clamped so it can **never go below zero**.
 
 ### 🗺️ Navigation Flow
 
 ```mermaid
 flowchart LR
-    A([Splash]) --> B[Home]
-    B --> C[Restaurants]
-    B --> D[Search]
-    B --> E[Offers]
-    B --> F[Orders]
-    B --> G[Profile]
-    B --> H[Cart]
-    C --> I[Restaurant Details]
-    I --> J[Food Details]
-    D --> J
-    B --> J
-    J --> H
-    H -->|Place Order| F
-    F -->|Reorder| H
-    G -->|Logout| K[Login]
-    K <--> L[Sign Up]
-    K --> B
+    A([Splash]) --> B[Login]
+    B <--> C[Sign Up]
+    B --> D{{Main Shell<br/>8 tabs}}
+    C --> D
+
+    D --> T1[Home]
+    D --> T2[Restaurants]
+    D --> T3[Search]
+    D --> T4[Offers]
+    D --> T5[Cart]
+    D --> T6[Orders]
+    D --> T7[Favorites]
+    D --> T8[Profile]
+
+    T1 --> R[Restaurant Details]
+    T2 --> R
+    R --> F[Food Details]
+    T1 --> F
+    T3 --> F
+    T7 --> F
+    F --> T5
+
+    T4 -->|Apply voucher| T5
+    T5 -->|Place Order| T6
+    T6 -->|Reorder| T5
+    T8 -->|Logout| B
 
     style A fill:#D70F64,color:#fff,stroke:none
-    style B fill:#FF2B85,color:#fff,stroke:none
-    style H fill:#B00B50,color:#fff,stroke:none
+    style D fill:#FF2B85,color:#fff,stroke:none
+    style T5 fill:#B00B50,color:#fff,stroke:none
 ```
 
 ### 🏗️ Architecture
 
 ```mermaid
 flowchart TB
-    subgraph UI["UI layer: 12 Activities"]
-        ACT[Splash · Main · Login · SignUp · Restaurants · Search<br/>Offers · Orders · Profile · RestaurantDetails · FoodDetails · Cart]
+    subgraph SHELL["Shell: MainActivity"]
+        MA[Tab bar · cart badge · fragment container]
+    end
+    subgraph FR["UI layer: 8 Fragments"]
+        FRG[Home · Restaurants · Search · Offers<br/>Cart · Orders · Favorites · Profile]
+    end
+    subgraph ACT["Standalone Activities"]
+        A1[Splash · Login · SignUp]
+        A2[RestaurantDetails · FoodDetails · Cart · legacy screens]
     end
     subgraph AD["Adapters: 5 RecyclerView adapters"]
         ADP[Food · PopularFood · Restaurant · Cart · Order]
     end
     subgraph DATA["Data layer"]
-        CM[CartManager<br/>singleton + change listeners]
+        CM[CartManager<br/>singleton · listeners · vouchers]
         SD[SampleData<br/>restaurants, dishes, orders]
     end
     subgraph MODEL["Models"]
         M[FoodItem · Restaurant · CartItem · Order · Category]
     end
-    ACT --> ADP
-    ACT --> CM
-    ACT --> SD
+    MA --> FRG
+    FRG --> ADP
+    FRG --> CM
+    FRG --> SD
+    FRG --> ACT
+    A2 --> CM
     ADP --> M
     CM --> M
     SD --> M
@@ -167,14 +202,29 @@ flowchart TB
 
 | Concept | Where it shows up |
 |---|---|
-| **Explicit intents + extras** | Passing a `FoodItem` / `Restaurant` between list and detail screens |
-| **Singleton + observer pattern** | `CartManager` notifies registered listeners whenever the cart changes |
+| **Fragment-based navigation** | `MainActivity` swaps 8 fragments inside one container and keeps the tab bar in sync |
+| **Singleton + observer pattern** | `CartManager` notifies registered listeners (cart badge, cart tab) whenever the cart changes |
+| **Shared state as a single source of truth** | Cart, voucher and totals live in one place, so features like vouchers plug in cleanly |
 | **RecyclerView + custom adapters** | Five adapters with click callbacks for item taps and quick-add |
-| **Form validation** | Login screen error states on `TextInputLayout` |
-| **Back-stack control** | `FLAG_ACTIVITY_CLEAR_TOP` after ordering, `CLEAR_TASK` on logout |
-| **Model layer separation** | `model/`, `adapter/` and `data/` packages kept apart from activities |
-| **Custom drawables** | Vector icons plus shape backgrounds for badges, chips, cards and buttons |
-| **Day and night themes** | `values` and `values-night` theme resources |
+| **Explicit intents + extras** | Passing a `FoodItem` / `Restaurant` from list screens to detail screens |
+| **Form validation** | Login and sign-up error states on `TextInputLayout` |
+| **Back-stack control** | `FLAG_ACTIVITY_CLEAR_TASK` on logout so Back never returns to a signed-in screen |
+| **Model layer separation** | `model/`, `adapter/`, `data/` and `fragment/` packages kept apart from activities |
+| **Custom drawables** | Vector icons plus shape backgrounds for badges, chips, cards, tabs and buttons |
+| **Day and night themes** | `values` and `values-night` on a Material 3 DayNight base |
+
+### 📊 Project Stats
+
+| Metric | Count |
+|---|---|
+| Activities | 12 |
+| Fragments | 8 |
+| RecyclerView adapters | 5 |
+| Model classes | 5 |
+| Layout files | 25 (12 activity · 8 fragment · 5 list item) |
+| Restaurants · Dishes · Sample orders | 6 · 24 · 3 |
+| Vector icons · Shape backgrounds | 23 · 10 |
+| Photo assets | 52 JPG (categories, dishes, restaurants, slider, clients) |
 
 ### 📁 Structure
 
@@ -182,15 +232,18 @@ flowchart TB
 Foodapp/app/src/main/
 ├── java/com/example/foodapp/
 │   ├── SplashActivity.java          LoginActivity.java       SignUpActivity.java
-│   ├── MainActivity.java            RestaurantsActivity.java SearchActivity.java
+│   ├── MainActivity.java            tab shell hosting the 8 fragments
 │   ├── RestaurantDetailsActivity    FoodDetailsActivity      CartActivity.java
-│   ├── OffersActivity.java          OrdersActivity.java      ProfileActivity.java
+│   ├── RestaurantsActivity.java     SearchActivity.java      OffersActivity.java
+│   ├── OrdersActivity.java          ProfileActivity.java
+│   ├── fragment/                    Home · Restaurants · Search · Offers
+│   │                                Cart · Orders · Favorites · Profile
 │   ├── adapter/                     5 RecyclerView adapters
-│   ├── data/                        CartManager · SampleData
+│   ├── data/                        CartManager (cart + vouchers) · SampleData
 │   └── model/                       CartItem · Category · FoodItem · Order · Restaurant
 └── res/
-    ├── layout/                      12 screens + 5 list-item layouts
-    ├── drawable/                    vector icons + shape backgrounds
+    ├── layout/                      activity_* · fragment_* · item_*
+    ├── drawable/                    vector icons + shape backgrounds + photos
     └── values/                      colors · strings · themes (+ values-night)
 ```
 
@@ -287,9 +340,9 @@ MyApplication/app/src/main/java/com/example/myapplication/
 | Area | Technologies |
 |---|---|
 | **Languages** | Java 11, Kotlin 2.2 |
-| **UI** | XML layouts, Material Components, Jetpack Compose, Material 3 |
+| **UI** | XML layouts, Material Components 1.14, Jetpack Compose, Material 3 |
+| **Navigation** | Fragment transactions inside a tab shell, explicit intents with extras, back-stack flags |
 | **Lists and data display** | `ListView`, `RecyclerView`, `BaseAdapter`, `RecyclerView.Adapter`, `ViewHolder` |
-| **Navigation** | Explicit intents with extras, back-stack flags |
 | **Patterns** | Singleton, observer (listeners), model/adapter/data separation |
 | **Build** | Gradle Kotlin DSL, version catalogs (`libs.versions.toml`), Android Gradle Plugin 9.x |
 | **Testing scaffold** | JUnit 4, Espresso, AndroidX Test |
@@ -301,7 +354,7 @@ MyApplication/app/src/main/java/com/example/myapplication/
 
 ```text
 mobile-app-development-coursework/
-├── 🍔 Foodapp/            Food-delivery app (Java + XML)
+├── 🍔 Foodapp/            Food-delivery app (Java + XML + Fragments)
 ├── 📱 Lists/              ListView vs RecyclerView (Java + XML)
 ├── 🧩 MyApplication/      Jetpack Compose starter (Kotlin)
 └── 📄 README.md
@@ -332,6 +385,12 @@ git clone https://github.com/furqanzubair209-cell/mobile-app-development-coursew
 
 > 💡 Each folder is its own Gradle project. Open `Foodapp`, `Lists` or `MyApplication` directly, **not** the repository root.
 
+### Try Foodie without Android Studio
+
+Download the debug APK from the **Releases** page, allow *Install unknown apps* for your browser or file manager, then open the file on any Android 7.0+ phone.
+
+> 🔑 Login and sign-up are **client-side only** (no backend), so any valid-looking email and a password of 4+ characters will sign you in. Try the vouchers `FOODIE50`, `BURGER20` and `FREEDEL` from the **Offers** tab.
+
 ---
 
 ## 🗓️ Roadmap
@@ -339,7 +398,9 @@ git clone https://github.com/furqanzubair209-cell/mobile-app-development-coursew
 - [x] Jetpack Compose starter project
 - [x] ListView vs RecyclerView comparison
 - [x] Multi-screen food-delivery app
-- [ ] Persist cart and orders locally (Room or SharedPreferences)
+- [x] Fragment-based tab navigation for Foodie
+- [x] Voucher engine with live cart totals
+- [ ] Persist cart, orders and login locally (Room or SharedPreferences)
 - [ ] Replace sample data with a remote API
 - [ ] Add UI tests for the Foodie order flow
 - [ ] Upcoming lab tasks and assignments
