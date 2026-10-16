@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Foodie Brand Colors (Foodpanda Pink Inspired) -->
+    <color name="foodie_pink">#D70F64</color>
+    <color name="foodie_pink_dark">#B00B50</color>
+    <color name="foodie_pink_light">#FFF0F5</color>
+    <color name="foodie_pink_accent">#FF2B85</color>
+
+    <!-- Neutral Colors -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="bg_light">#F8F9FA</color>
+    <color name="card_bg">#FFFFFF</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#1F2125</color>
+    <color name="text_secondary">#70757A</color>
+    <color name="text_muted">#9AA0A6</color>
+
+    <!-- Status & Accent Colors -->
+    <color name="star_yellow">#FFC107</color>
+    <color name="status_green">#28A745</color>
+    <color name="status_orange">#FD7E14</color>
+    <color name="border_color">#E5E7EB</color>
+    <color name="divider_color">#EEEEEE</color>
+</resources>

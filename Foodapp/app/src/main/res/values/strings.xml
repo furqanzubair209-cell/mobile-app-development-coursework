@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Foodie</string>
+
+    <!-- Navigation Labels -->
+    <string name="nav_home">Home</string>
+    <string name="nav_restaurants">Restaurants</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_offers">Offers</string>
+    <string name="nav_orders">Orders</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- Auth Strings -->
+    <string name="title_login">Welcome Back</string>
+    <string name="subtitle_login">Sign in to continue ordering delicious food</string>
+    <string name="title_sign_up">Create Account</string>
+    <string name="subtitle_sign_up">Join Foodie to enjoy exclusive offers</string>
+    <string name="label_full_name">Full Name</string>
+    <string name="label_email">Email Address</string>
+    <string name="label_password">Password</string>
+    <string name="label_confirm_password">Confirm Password</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_sign_up">Sign Up</string>
+    <string name="link_to_sign_up">Don\'t have an account? Sign Up</string>
+    <string name="link_to_login">Already have an account? Login</string>
+
+    <!-- General UI -->
+    <string name="deliver_to">Deliver to</string>
+    <string name="sample_address">123 Market Street, Downtown</string>
+    <string name="search_hint">Search for restaurants or dishes…</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="view_cart">View Cart</string>
+    <string name="place_order">Place Order</string>
+    <string name="cart_title">Your Shopping Cart</string>
+    <string name="cart_empty">Your cart is empty</string>
+    <string name="cart_empty_sub">Explore restaurants and add delicious meals!</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="delivery_fee">Delivery Fee</string>
+    <string name="total">Total</string>
+</resources>

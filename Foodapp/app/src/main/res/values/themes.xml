@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.FoodApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize primary brand colors. -->
+        <item name="colorPrimary">@color/foodie_pink</item>
+        <item name="colorPrimaryVariant">@color/foodie_pink_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/foodie_pink_light</item>
+        <item name="colorOnSecondary">@color/foodie_pink</item>
+        <item name="android:statusBarColor">@color/foodie_pink</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowBackground">@color/bg_light</item>
+    </style>
+
+    <style name="Theme.FoodApp" parent="Base.Theme.FoodApp" />
+</resources>
