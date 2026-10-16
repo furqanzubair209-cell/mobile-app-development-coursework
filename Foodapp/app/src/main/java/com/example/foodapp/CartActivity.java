@@ -94,7 +94,7 @@ public class CartActivity extends AppCompatActivity implements CartManager.OnCar
             SampleData.addOrder(newOrder);
 
             new AlertDialog.Builder(CartActivity.this)
-                    .setTitle("Order Placed Successfully! 🎉")
+                    .setTitle("Order Placed Successfully! \uD83C\uDF89")
                     .setMessage("Your order #" + orderId + " has been sent to the restaurant and is now in transit!")
                     .setPositiveButton("View Order", (dialog, which) -> {
                         CartManager.getInstance().clearCart();
