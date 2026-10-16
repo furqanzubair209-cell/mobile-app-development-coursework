@@ -1,0 +1,40 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+
+    <!-- Outer White Ring Shadow -->
+    <path
+        android:fillColor="#1A000000"
+        android:pathData="M48,94 C72.85,94 93,73.85 93,49 C93,24.15 72.85,4 48,4 C23.15,4 3,24.15 3,49 C3,73.85 23.15,94 48,94 Z" />
+
+    <!-- Main Vibrant Pink Circle Base -->
+    <path
+        android:fillColor="#D70F64"
+        android:pathData="M48,90 C71.19,90 90,71.19 90,48 C90,24.81 71.19,6 48,6 C24.81,6 6,24.81 6,48 C6,71.19 24.81,90 48,90 Z" />
+
+    <!-- Subtle Top Highlight Arch -->
+    <path
+        android:fillColor="#33FFFFFF"
+        android:pathData="M48,10 C68.99,10 86,27.01 86,48 C86,51.2 85.6,54.3 84.85,57.2 C81.5,33.8 61.2,16 36.5,16 C25.8,16 15.9,19.8 8.2,26.1 C14.6,16.5 25.5,10 48,10 Z" />
+
+    <!-- Food Dome / Cloche Lid -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M48,22 C46.34,22 45,23.34 45,25 C45,25.7 45.24,26.34 45.65,26.85 C33.8,28.45 25,38.6 25,50 C25,50.55 25.45,51 26,51 L70,51 C70.55,51 71,50.55 71,50 C71,38.6 62.2,28.45 50.35,26.85 C50.76,26.34 51,25.7 51,25 C51,23.34 49.66,22 48,22 Z M31.5,47 C32.3,38.8 39.2,32.3 48,32.3 C56.8,32.3 63.7,38.8 64.5,47 L31.5,47 Z" />
+
+    <!-- Serving Platter Tray -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M21,55 C20.45,55 20,55.45 20,56 C20,58.21 21.79,60 24,60 L72,60 C74.21,60 76,58.21 76,56 C76,55.45 75.55,55 75,55 L21,55 Z M24,58 C22.9,58 22,57.1 22,56 L74,56 C74,57.1 73.1,58 72,58 L24,58 Z" />
+
+    <!-- Cheerful Heart/Smile Accent under Tray -->
+    <path
+        android:fillColor="#FFE0EC"
+        android:pathData="M48,64 C42,64 37.5,68.5 37.5,73 C37.5,78.5 48,84 48,84 C48,84 58.5,78.5 58.5,73 C58.5,68.5 54,64 48,64 Z" />
+    <path
+        android:fillColor="#D70F64"
+        android:pathData="M48,67 C44,67 41,70 41,73 C41,76.5 48,80.5 48,80.5 C48,80.5 55,76.5 55,73 C55,70 52,67 48,67 Z" />
+
+</vector>
