@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.foodapp.LoginActivity;
+import com.example.foodapp.MainActivity;
 import com.example.foodapp.R;
 
 public class ProfileFragment extends Fragment {
@@ -49,11 +49,12 @@ public class ProfileFragment extends Fragment {
 
         if (btnLogout != null) {
             btnLogout.setOnClickListener(v -> {
-                Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(requireActivity(), LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                requireActivity().finish();
+                if (isAdded() && getContext() != null) {
+                    Toast.makeText(getContext(), "Logged out successfully", Toast.LENGTH_SHORT).show();
+                }
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).showLoginFragment();
+                }
             });
         }
     }

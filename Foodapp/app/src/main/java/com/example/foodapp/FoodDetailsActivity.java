@@ -65,7 +65,6 @@ public class FoodDetailsActivity extends AppCompatActivity {
         btnAddToCart.setOnClickListener(v -> {
             CartManager.getInstance().addItem(foodItem, quantity);
             Toast.makeText(FoodDetailsActivity.this, quantity + "x " + foodItem.getName() + " added to cart!", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(FoodDetailsActivity.this, CartActivity.class));
             finish();
         });
 

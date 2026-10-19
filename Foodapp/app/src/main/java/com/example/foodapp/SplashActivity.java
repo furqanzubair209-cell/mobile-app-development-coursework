@@ -14,9 +14,11 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        // Delay for 1.5 seconds then open LoginActivity (must login/signup first)
+        // Delay for 1.5 seconds then open MainActivity with LoginFragment
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            intent.putExtra("start_login", true);
+            startActivity(intent);
             finish();
         }, 1500);
     }

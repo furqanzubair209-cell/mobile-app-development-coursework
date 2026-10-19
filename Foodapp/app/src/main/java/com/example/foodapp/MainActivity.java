@@ -1,5 +1,6 @@
 package com.example.foodapp;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -14,11 +15,13 @@ import com.example.foodapp.data.CartManager;
 import com.example.foodapp.fragment.CartFragment;
 import com.example.foodapp.fragment.FavoritesFragment;
 import com.example.foodapp.fragment.HomeFragment;
+import com.example.foodapp.fragment.LoginFragment;
 import com.example.foodapp.fragment.OffersFragment;
 import com.example.foodapp.fragment.OrdersFragment;
 import com.example.foodapp.fragment.ProfileFragment;
 import com.example.foodapp.fragment.RestaurantsFragment;
 import com.example.foodapp.fragment.SearchFragment;
+import com.example.foodapp.fragment.SignUpFragment;
 
 public class MainActivity extends AppCompatActivity implements CartManager.OnCartChangeListener {
 
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements CartManager.OnCar
     private final TextView[] tabViews = new TextView[TAB_COUNT];
     private int currentTab = 0;
     private HorizontalScrollView tabScrollView;
+    private View mainHeaderBar;
     private TextView tvCartBadge;
 
     private final String[] tabLabels = {
@@ -38,49 +42,87 @@ public class MainActivity extends AppCompatActivity implements CartManager.OnCar
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Header Cart Button & Badge
+        mainHeaderBar = findViewById(R.id.mainHeaderBar);
+        tabScrollView = findViewById(R.id.tabScrollView);
         tvCartBadge = findViewById(R.id.tvCartBadge);
+
+        // Header Cart Button & Badge
         FrameLayout btnCartHeader = findViewById(R.id.btnCartHeader);
         if (btnCartHeader != null) {
             btnCartHeader.setOnClickListener(v -> navigateToFragment(4)); // Go to Cart Fragment
         }
 
-        tabScrollView = findViewById(R.id.tabScrollView);
         LinearLayout tabContainer = findViewById(R.id.tabContainer);
 
         // Dynamically create 8 tab pills
-        for (int i = 0; i < TAB_COUNT; i++) {
-            final int tabIndex = i;
-            TextView tab = new TextView(this);
-            tab.setText(tabLabels[i]);
-            tab.setTextSize(13);
-            tab.setPadding(dp(16), dp(10), dp(16), dp(10));
+        if (tabContainer != null) {
+            for (int i = 0; i < TAB_COUNT; i++) {
+                final int tabIndex = i;
+                TextView tab = new TextView(this);
+                tab.setText(tabLabels[i]);
+                tab.setTextSize(13);
+                tab.setPadding(dp(16), dp(10), dp(16), dp(10));
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            );
-            params.setMargins(dp(4), dp(4), dp(4), dp(4));
-            tab.setLayoutParams(params);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                params.setMargins(dp(4), dp(4), dp(4), dp(4));
+                tab.setLayoutParams(params);
 
-            tab.setOnClickListener(v -> navigateToFragment(tabIndex));
+                tab.setOnClickListener(v -> navigateToFragment(tabIndex));
 
-            tabContainer.addView(tab);
-            tabViews[i] = tab;
+                tabContainer.addView(tab);
+                tabViews[i] = tab;
+            }
         }
 
         // Listen for Cart updates to keep badge in sync
         CartManager.getInstance().addListener(this);
         updateCartBadge();
 
-        // Load default fragment
+        // Load default fragment or login fragment
         if (savedInstanceState == null) {
-            navigateToFragment(0);
+            if (getIntent() != null && getIntent().getBooleanExtra("start_login", false)) {
+                showLoginFragment();
+            } else {
+                navigateToFragment(0);
+            }
         }
+    }
+
+    public void showLoginFragment() {
+        if (mainHeaderBar != null) mainHeaderBar.setVisibility(View.GONE);
+        if (tabScrollView != null) tabScrollView.setVisibility(View.GONE);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, new LoginFragment())
+                .commit();
+    }
+
+    public void showSignUpFragment() {
+        if (mainHeaderBar != null) mainHeaderBar.setVisibility(View.GONE);
+        if (tabScrollView != null) tabScrollView.setVisibility(View.GONE);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, new SignUpFragment())
+                .commit();
+    }
+
+    public void onAuthSuccess() {
+        if (mainHeaderBar != null) mainHeaderBar.setVisibility(View.VISIBLE);
+        if (tabScrollView != null) tabScrollView.setVisibility(View.VISIBLE);
+
+        navigateToFragment(0);
     }
 
     public void navigateToFragment(int index) {
         if (index < 0 || index >= TAB_COUNT) return;
+
+        if (mainHeaderBar != null) mainHeaderBar.setVisibility(View.VISIBLE);
+        if (tabScrollView != null) tabScrollView.setVisibility(View.VISIBLE);
 
         Fragment fragment = getFragmentForIndex(index);
         if (fragment == null) return;
@@ -124,11 +166,11 @@ public class MainActivity extends AppCompatActivity implements CartManager.OnCar
             if (i == selectedIndex) {
                 tab.setBackgroundResource(R.drawable.bg_tab_selected);
                 tab.setTextColor(getResources().getColor(R.color.white, null));
-                tab.setTypeface(null, android.graphics.Typeface.BOLD);
+                tab.setTypeface(null, Typeface.BOLD);
             } else {
                 tab.setBackgroundResource(R.drawable.bg_tab_unselected);
                 tab.setTextColor(getResources().getColor(R.color.text_primary, null));
-                tab.setTypeface(null, android.graphics.Typeface.BOLD);
+                tab.setTypeface(null, Typeface.BOLD);
             }
         }
     }

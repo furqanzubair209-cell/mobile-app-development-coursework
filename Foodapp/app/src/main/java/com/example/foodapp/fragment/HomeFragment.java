@@ -16,9 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.FoodDetailsActivity;
+import com.example.foodapp.MainActivity;
 import com.example.foodapp.R;
 import com.example.foodapp.RestaurantDetailsActivity;
-import com.example.foodapp.RestaurantsActivity;
 import com.example.foodapp.adapter.PopularFoodAdapter;
 import com.example.foodapp.adapter.RestaurantAdapter;
 import com.example.foodapp.data.CartManager;
@@ -44,26 +44,17 @@ public class HomeFragment extends Fragment {
         LinearLayout searchBarClickable = view.findViewById(R.id.searchBarClickable);
         if (searchBarClickable != null) {
             searchBarClickable.setOnClickListener(v -> {
-                if (getActivity() instanceof com.example.foodapp.MainActivity) {
-                    ((com.example.foodapp.MainActivity) getActivity()).navigateToFragment(2); // Search tab
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).navigateToFragment(2); // Search tab
                 }
             });
         }
 
-        // Category Clicks
+        // Category Clicks -> Switch to Restaurants tab
         View.OnClickListener categoryClickListener = v -> {
-            String category = "Pizza";
-            int vId = v.getId();
-            if (vId == R.id.catPizza) category = "Pizza";
-            else if (vId == R.id.catBurgers) category = "Burgers";
-            else if (vId == R.id.catSushi) category = "Sushi";
-            else if (vId == R.id.catNoodles) category = "Noodles";
-            else if (vId == R.id.catDesserts) category = "Desserts";
-            else if (vId == R.id.catDrinks) category = "Drinks";
-
-            Intent intent = new Intent(requireActivity(), RestaurantsActivity.class);
-            intent.putExtra("category", category);
-            startActivity(intent);
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).navigateToFragment(1); // Restaurants tab
+            }
         };
         int[] categoryIds = {
             R.id.catPizza, R.id.catBurgers, R.id.catSushi,
@@ -76,12 +67,21 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        // Promotional Banner Button -> Switch to Offers tab
+        // Promotional Banner Card & Button -> Switch to Offers tab
+        View bannerPromo = view.findViewById(R.id.bannerPromo);
+        if (bannerPromo != null) {
+            bannerPromo.setOnClickListener(v -> {
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).navigateToFragment(3); // Offers tab
+                }
+            });
+        }
+
         Button btnClaimOffer = view.findViewById(R.id.btnClaimOffer);
         if (btnClaimOffer != null) {
             btnClaimOffer.setOnClickListener(v -> {
-                if (getActivity() instanceof com.example.foodapp.MainActivity) {
-                    ((com.example.foodapp.MainActivity) getActivity()).navigateToFragment(3); // Offers tab
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).navigateToFragment(3); // Offers tab
                 }
             });
         }
@@ -90,8 +90,8 @@ public class HomeFragment extends Fragment {
         View btnSeeAllProducts = view.findViewById(R.id.btnSeeAllProducts);
         if (btnSeeAllProducts != null) {
             btnSeeAllProducts.setOnClickListener(v -> {
-                if (getActivity() instanceof com.example.foodapp.MainActivity) {
-                    ((com.example.foodapp.MainActivity) getActivity()).navigateToFragment(2); // Search tab
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).navigateToFragment(2); // Search tab
                 }
             });
         }
@@ -123,8 +123,8 @@ public class HomeFragment extends Fragment {
         View btnSeeAllRestaurants = view.findViewById(R.id.btnSeeAllRestaurants);
         if (btnSeeAllRestaurants != null) {
             btnSeeAllRestaurants.setOnClickListener(v -> {
-                if (getActivity() instanceof com.example.foodapp.MainActivity) {
-                    ((com.example.foodapp.MainActivity) getActivity()).navigateToFragment(1); // Restaurants tab
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).navigateToFragment(1); // Restaurants tab
                 }
             });
         }

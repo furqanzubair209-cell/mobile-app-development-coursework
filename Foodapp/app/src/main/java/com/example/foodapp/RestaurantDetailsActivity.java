@@ -59,7 +59,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity implements Cart
 
         barBottomCart = findViewById(R.id.barBottomCart);
         btnViewCartBar = findViewById(R.id.btnViewCartBar);
-        btnViewCartBar.setOnClickListener(v -> startActivity(new Intent(RestaurantDetailsActivity.this, CartActivity.class)));
+        btnViewCartBar.setOnClickListener(v -> finish());
 
         RecyclerView rvMenu = findViewById(R.id.rvMenuFoodItems);
         rvMenu.setLayoutManager(new LinearLayoutManager(this));

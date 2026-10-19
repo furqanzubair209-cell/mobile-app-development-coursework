@@ -33,7 +33,9 @@ public class OffersFragment extends Fragment {
         if (btnVoucher1 != null) {
             btnVoucher1.setOnClickListener(v -> {
                 CartManager.getInstance().applyVoucher("FOODIE50");
-                Toast.makeText(requireContext(), "\uD83C\uDF89 Voucher FOODIE50 Applied! 50% OFF", Toast.LENGTH_SHORT).show();
+                if (isAdded() && getContext() != null) {
+                    Toast.makeText(getContext(), "\uD83C\uDF89 Voucher FOODIE50 Applied! 50% OFF", Toast.LENGTH_SHORT).show();
+                }
                 btnVoucher1.setText("\u2713 FOODIE50 Applied");
                 btnVoucher1.setEnabled(false);
                 btnVoucher1.setAlpha(0.6f);
@@ -43,7 +45,9 @@ public class OffersFragment extends Fragment {
         if (btnVoucher2 != null) {
             btnVoucher2.setOnClickListener(v -> {
                 CartManager.getInstance().applyVoucher("FREEDEL");
-                Toast.makeText(requireContext(), "\uD83D\uDE9A Voucher FREEDEL Applied! Free Delivery", Toast.LENGTH_SHORT).show();
+                if (isAdded() && getContext() != null) {
+                    Toast.makeText(getContext(), "\uD83D\uDE9A Voucher FREEDEL Applied! Free Delivery", Toast.LENGTH_SHORT).show();
+                }
                 btnVoucher2.setText("\u2713 FREEDEL Applied");
                 btnVoucher2.setEnabled(false);
                 btnVoucher2.setAlpha(0.6f);
@@ -53,7 +57,9 @@ public class OffersFragment extends Fragment {
         if (btnVoucher3 != null) {
             btnVoucher3.setOnClickListener(v -> {
                 CartManager.getInstance().applyVoucher("BURGER20");
-                Toast.makeText(requireContext(), "\uD83C\uDF54 Voucher BURGER20 Applied! 20% OFF", Toast.LENGTH_SHORT).show();
+                if (isAdded() && getContext() != null) {
+                    Toast.makeText(getContext(), "\uD83C\uDF54 Voucher BURGER20 Applied! 20% OFF", Toast.LENGTH_SHORT).show();
+                }
                 btnVoucher3.setText("\u2713 BURGER20 Applied");
                 btnVoucher3.setEnabled(false);
                 btnVoucher3.setAlpha(0.6f);

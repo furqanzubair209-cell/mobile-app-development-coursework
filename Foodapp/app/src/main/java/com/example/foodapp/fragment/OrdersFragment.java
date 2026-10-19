@@ -1,6 +1,5 @@
 package com.example.foodapp.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.foodapp.CartActivity;
+import com.example.foodapp.MainActivity;
 import com.example.foodapp.R;
 import com.example.foodapp.adapter.OrderAdapter;
 import com.example.foodapp.data.CartManager;
@@ -40,8 +39,12 @@ public class OrdersFragment extends Fragment {
             adapter = new OrderAdapter(SampleData.getSampleOrders(), order -> {
                 if (!SampleData.getAllFoodItems().isEmpty()) {
                     CartManager.getInstance().addItem(SampleData.getAllFoodItems().get(0), 1);
-                    Toast.makeText(requireContext(), "Reordered items added to Cart!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(requireActivity(), CartActivity.class));
+                    if (isAdded() && getContext() != null) {
+                        Toast.makeText(getContext(), "\uD83C\uDF89 Reordered items added to Cart!", Toast.LENGTH_SHORT).show();
+                    }
+                    if (getActivity() instanceof MainActivity) {
+                        ((MainActivity) getActivity()).navigateToFragment(4); // Cart tab
+                    }
                 }
             });
 

@@ -23,49 +23,11 @@
             </intent-filter>
         </activity>
 
-        <!-- Main Home Screen -->
+        <!-- Main Container Activity for Fragments -->
         <activity
             android:name=".MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-
-        <!-- Login Activity -->
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-
-        <!-- Sign Up Activity -->
-        <activity
-            android:name=".SignUpActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-
-        <!-- Restaurants List Activity -->
-        <activity
-            android:name=".RestaurantsActivity"
-            android:exported="false" />
-
-        <!-- Search Activity -->
-        <activity
-            android:name=".SearchActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-
-        <!-- Offers Activity -->
-        <activity
-            android:name=".OffersActivity"
-            android:exported="false" />
-
-        <!-- Orders Activity -->
-        <activity
-            android:name=".OrdersActivity"
-            android:exported="false" />
-
-        <!-- Profile Activity -->
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="false" />
 
         <!-- Restaurant Details Activity -->
         <activity
@@ -75,11 +37,6 @@
         <!-- Food Details Activity -->
         <activity
             android:name=".FoodDetailsActivity"
-            android:exported="false" />
-
-        <!-- Shopping Cart Activity -->
-        <activity
-            android:name=".CartActivity"
             android:exported="false" />
 
     </application>

@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.R;
-import com.example.foodapp.RestaurantsActivity;
 import com.example.foodapp.adapter.CartAdapter;
 import com.example.foodapp.data.CartManager;
 import com.example.foodapp.data.SampleData;
