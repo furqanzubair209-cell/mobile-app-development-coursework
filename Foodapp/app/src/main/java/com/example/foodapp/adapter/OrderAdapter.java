@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,6 +46,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.tvItemsSummary.setText(order.getItemsSummary());
         holder.tvPrice.setText(String.format(Locale.US, "Total: $%.2f", order.getTotalPrice()));
 
+        if (holder.ivOrderImage != null) {
+            holder.ivOrderImage.setImageResource(order.getImageResId());
+        }
+
         holder.btnReorder.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onReorderClick(order);
@@ -58,11 +63,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView ivOrderImage;
         TextView tvRestaurantName, tvStatusBadge, tvDate, tvItemsSummary, tvPrice;
         Button btnReorder;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            ivOrderImage = itemView.findViewById(R.id.ivOrderImage);
             tvRestaurantName = itemView.findViewById(R.id.tvOrderRestaurantName);
             tvStatusBadge = itemView.findViewById(R.id.tvOrderStatusBadge);
             tvDate = itemView.findViewById(R.id.tvOrderDate);

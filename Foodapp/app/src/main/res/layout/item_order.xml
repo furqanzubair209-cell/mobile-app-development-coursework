@@ -12,65 +12,108 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="14dp">
 
+        <!-- Header: Image + Restaurant Info & Status -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <TextView
-                android:id="@+id/tvOrderRestaurantName"
+            <!-- Order Thumbnail Image -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#F0F0F0"
+                app:strokeWidth="1dp"
+                app:cardBackgroundColor="@color/bg_light">
+
+                <ImageView
+                    android:id="@+id/ivOrderImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/rest_burger_barn"
+                    android:contentDescription="Order Image" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Order Main Details -->
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Burger Kingdom"
-                android:textColor="@color/text_primary"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_marginStart="12dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvOrderStatusBadge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_chip"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="4dp"
-                android:text="Delivered"
-                android:textColor="@color/foodie_pink"
-                android:textSize="11sp"
-                android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tvOrderRestaurantName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Burger Kingdom"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:maxLines="1"
+                        android:ellipsize="end" />
+
+                    <TextView
+                        android:id="@+id/tvOrderStatusBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_chip"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:text="Delivered"
+                        android:textColor="@color/foodie_pink"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvOrderDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Today, 12:45 PM • ORD-89412"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvOrderItemsSummary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="1x Double Cheeseburger, 1x Golden Fries"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+
+            </LinearLayout>
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvOrderDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="Today, 12:45 PM • ORD-89412"
-            android:textColor="@color/text_muted"
-            android:textSize="12sp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginVertical="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="10dp"
             android:background="@color/divider_color" />
 
-        <TextView
-            android:id="@+id/tvOrderItemsSummary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1x Double Cheeseburger, 1x Golden Fries"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp" />
-
+        <!-- Footer: Total Price & Reorder Button -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="12dp"
             android:gravity="center_vertical">
 
             <TextView
@@ -92,7 +135,9 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:backgroundTint="@color/foodie_pink_light"
-                style="@style/Widget.Material3.Button" />
+                app:strokeColor="@color/foodie_pink"
+                app:strokeWidth="1dp"
+                style="@style/Widget.Material3.Button.OutlinedButton" />
         </LinearLayout>
 
     </LinearLayout>

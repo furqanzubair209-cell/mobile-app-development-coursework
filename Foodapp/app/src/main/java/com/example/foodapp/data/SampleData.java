@@ -88,9 +88,9 @@ public class SampleData {
     public static List<Order> getSampleOrders() {
         if (orders == null) {
             orders = new ArrayList<>();
-            orders.add(new Order("ORD-89412", "Burger Barn", "Today, 12:45 PM", "1x Double Beef Burger, 1x Loaded Golden Fries", 12.98, "In Transit"));
-            orders.add(new Order("ORD-88231", "Pizza Palace", "Yesterday, 7:15 PM", "1x Pepperoni Feast Pizza, 1x Garlic Breadsticks", 17.48, "Delivered"));
-            orders.add(new Order("ORD-87102", "Tokyo Sushi Bar", "12 Oct 2024", "2x Salmon Avocado Roll, 1x Miso Soup", 23.97, "Delivered"));
+            orders.add(new Order("ORD-89412", "Burger Barn", "Today, 12:45 PM", "1x Double Beef Burger, 1x Loaded Golden Fries", 12.98, "In Transit", R.drawable.rest_burger_barn));
+            orders.add(new Order("ORD-88231", "Pizza Palace", "Yesterday, 7:15 PM", "1x Pepperoni Feast Pizza, 1x Garlic Breadsticks", 17.48, "Delivered", R.drawable.rest_pizza_palace));
+            orders.add(new Order("ORD-87102", "Tokyo Sushi Bar", "12 Oct 2024", "2x Salmon Avocado Roll, 1x Miso Soup", 23.97, "Delivered", R.drawable.rest_tokyo_sushi));
         }
         return orders;
     }

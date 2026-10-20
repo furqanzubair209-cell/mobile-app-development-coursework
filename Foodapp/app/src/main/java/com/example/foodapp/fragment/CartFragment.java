@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodapp.MainActivity;
 import com.example.foodapp.R;
 import com.example.foodapp.adapter.CartAdapter;
 import com.example.foodapp.data.CartManager;
@@ -109,7 +110,10 @@ public class CartFragment extends Fragment implements CartManager.OnCartChangeLi
                 String orderId = "ORD-" + (10000 + (int) (Math.random() * 90000));
                 String itemsSummary = cartItems.size() + " item(s) ordered";
 
-                Order newOrder = new Order(orderId, "Foodie Express", "Just now", itemsSummary, total, "In Transit");
+                int imageRes = (!cartItems.isEmpty() && cartItems.get(0).getFoodItem() != null)
+                        ? cartItems.get(0).getFoodItem().getImageResId()
+                        : R.drawable.rest_burger_barn;
+                Order newOrder = new Order(orderId, "Foodie Express", "Just now", itemsSummary, total, "In Transit", imageRes);
                 SampleData.addOrder(newOrder);
 
                 new AlertDialog.Builder(requireContext())
@@ -117,8 +121,8 @@ public class CartFragment extends Fragment implements CartManager.OnCartChangeLi
                         .setMessage("Your order #" + orderId + " has been sent to the restaurant and is now in transit!")
                         .setPositiveButton("View Orders", (dialog, which) -> {
                             CartManager.getInstance().clearCart();
-                            if (getActivity() instanceof com.example.foodapp.MainActivity) {
-                                ((com.example.foodapp.MainActivity) getActivity()).navigateToFragment(5); // Orders tab
+                            if (getActivity() instanceof MainActivity) {
+                                ((MainActivity) getActivity()).navigateToFragment(5); // Orders tab
                             }
                         })
                         .setCancelable(false)

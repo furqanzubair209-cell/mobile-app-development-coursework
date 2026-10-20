@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.FoodDetailsActivity;
 import com.example.foodapp.R;
-import com.example.foodapp.adapter.PopularFoodAdapter;
+import com.example.foodapp.adapter.FoodAdapter;
 import com.example.foodapp.data.CartManager;
 import com.example.foodapp.data.SampleData;
 import com.example.foodapp.model.FoodItem;
@@ -39,11 +38,11 @@ public class FavoritesFragment extends Fragment {
         if (rvFavorites != null) {
             rvFavorites.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-            // Show top-rated items as "favorites"
+            // Show top-rated items as "favorites" in full-width list view
             List<FoodItem> allFood = SampleData.getAllFoodItems();
             List<FoodItem> favorites = allFood.subList(0, Math.min(6, allFood.size()));
 
-            PopularFoodAdapter adapter = new PopularFoodAdapter(favorites, new PopularFoodAdapter.OnPopularFoodClickListener() {
+            FoodAdapter adapter = new FoodAdapter(favorites, new FoodAdapter.OnFoodClickListener() {
                 @Override
                 public void onFoodClick(FoodItem foodItem) {
                     Intent intent = new Intent(requireActivity(), FoodDetailsActivity.class);
