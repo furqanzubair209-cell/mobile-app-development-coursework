@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Theme Colors -->
+    <color name="colorPrimary">#4F46E5</color>
+    <color name="colorPrimaryDark">#3730A3</color>
+    <color name="colorAccent">#06B6D4</color>
+
+    <!-- Charismatic Vibrant Palette -->
+    <color name="primary">#4F46E5</color>
+    <color name="primary_dark">#4338CA</color>
+    <color name="primary_light">#EEF2FF</color>
+    <color name="secondary">#06B6D4</color>
+    <color name="secondary_light">#E0F2FE</color>
+    <color name="accent_purple">#7C3AED</color>
+    <color name="accent_purple_light">#F5F3FF</color>
+    <color name="accent_coral">#F43F5E</color>
+
+    <!-- Semantic Status Colors -->
+    <color name="success">#10B981</color>
+    <color name="success_dark">#059669</color>
+    <color name="success_light">#ECFDF5</color>
+
+    <color name="warning">#F59E0B</color>
+    <color name="warning_dark">#D97706</color>
+    <color name="warning_light">#FFFBEB</color>
+
+    <color name="danger">#EF4444</color>
+    <color name="danger_dark">#DC2626</color>
+    <color name="danger_light">#FEF2F2</color>
+
+    <!-- Neutral Backgrounds & Cards -->
+    <color name="surface_bg">#F8FAFC</color>
+    <color name="surface_card">#FFFFFF</color>
+    <color name="card_bg">#FFFFFF</color>
+    <color name="card_stroke">#E2E8F0</color>
+    <color name="divider_color">#E2E8F0</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#0F172A</color>
+    <color name="text_secondary">#475569</color>
+    <color name="text_muted">#94A3B8</color>
+
+    <!-- Gender Tag Colors -->
+    <color name="male_color">#2563EB</color>
+    <color name="male_bg">#EFF6FF</color>
+    <color name="female_color">#DB2777</color>
+    <color name="female_bg">#FDF2F8</color>
+
+    <!-- Course / Specialization Chips -->
+    <color name="course_color">#0284C7</color>
+    <color name="course_bg">#E0F2FE</color>
+    <color name="chip_bg">#F1F5F9</color>
+    <color name="chip_stroke">#CBD5E1</color>
+    <color name="chip_text">#334155</color>
+
+    <!-- Gradients -->
+    <color name="gradient_start">#4F46E5</color>
+    <color name="gradient_center">#6366F1</color>
+    <color name="gradient_end">#7C3AED</color>
+    <color name="gradient_header_records_start">#06B6D4</color>
+    <color name="gradient_header_records_end">#4F46E5</color>
+</resources>

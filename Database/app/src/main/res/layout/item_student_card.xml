@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardStudent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="@color/card_bg"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="3dp"
+    app:rippleColor="@color/primary_light"
+    app:strokeColor="@color/card_stroke"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Student Image / Avatar Frame -->
+            <FrameLayout
+                android:id="@+id/layoutAvatar"
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:background="@drawable/bg_avatar_male">
+
+                <!-- Image view for Profile Photo -->
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivStudentCardPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="Profile Photo"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
+                <!-- Text view for Initial Badge -->
+                <TextView
+                    android:id="@+id/tvAvatarInitial"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="S"
+                    android:textColor="@color/male_color"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <!-- Name and Badges Column -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvStudentName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="John Doe"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <!-- ID Pill -->
+                    <TextView
+                        android:id="@+id/tvStudentIdBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_id_chip"
+                        android:text="ID #1"
+                        android:textColor="@color/primary"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- Gender Pill -->
+                    <TextView
+                        android:id="@+id/tvGenderBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_pill_male"
+                        android:text="Male"
+                        android:textColor="@color/male_color"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <!-- Email preview -->
+                    <TextView
+                        android:id="@+id/tvStudentEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="john@example.com"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <!-- Department Badge (From Dropdown) -->
+                <TextView
+                    android:id="@+id/tvDepartmentBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/bg_counter_badge"
+                    android:backgroundTint="@color/primary_light"
+                    android:drawablePadding="4dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Department of IT"
+                    android:textColor="@color/primary"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/ic_dropdown"
+                    app:drawableTint="@color/primary" />
+
+                <!-- Course & Facilities Badge Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvCourseBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_pill_course"
+                        android:drawablePadding="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Computer Science"
+                        android:textColor="@color/success_dark"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_course"
+                        app:drawableTint="@color/success_dark" />
+
+                    <TextView
+                        android:id="@+id/tvFacilitiesBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/bg_pill_facility"
+                        android:drawablePadding="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Hostel, Transport"
+                        android:textColor="@color/warning_dark"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_facility"
+                        app:drawableTint="@color/warning_dark" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Quick Action: Edit & Delete buttons -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/btnQuickEdit"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:contentDescription="Edit"
+                    android:focusable="true"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_edit"
+                    app:tint="@color/primary" />
+
+                <ImageView
+                    android:id="@+id/btnQuickDelete"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="2dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:contentDescription="Delete"
+                    android:focusable="true"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_delete"
+                    app:tint="@color/danger" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
