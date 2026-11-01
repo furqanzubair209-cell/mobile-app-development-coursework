@@ -1,3 +1,4 @@
+[README_updated.md](https://github.com/user-attachments/files/34237094/README_updated.md)
 <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=220&section=header&text=Mobile%20App%20Development&fontSize=48&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=Coursework%20%E2%80%A2%20Labs%20%E2%80%A2%20Assignments%20%E2%80%A2%20Android%20Studio&descSize=17&descAlignY=58" alt="Mobile App Development Coursework" width="100%"/>
@@ -15,13 +16,13 @@
 
 ![Min SDK](https://img.shields.io/badge/Min%20SDK-24%20(Android%207.0)-brightgreen?style=flat-square&logo=android)
 ![Target SDK](https://img.shields.io/badge/Target%20SDK-37-blue?style=flat-square&logo=android)
-![Projects](https://img.shields.io/badge/Projects-3-ff69b4?style=flat-square)
+![Projects](https://img.shields.io/badge/Projects-4-ff69b4?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-In%20Progress-yellow?style=flat-square)
 ![Last Commit](https://img.shields.io/github/last-commit/furqanzubair209-cell/mobile-app-development-coursework?style=flat-square&color=blueviolet)
 ![Repo Size](https://img.shields.io/github/repo-size/furqanzubair209-cell/mobile-app-development-coursework?style=flat-square&color=orange)
 
-**Three standalone Android Studio projects, one repository.**
-From a Compose starter, to a ListView vs RecyclerView showdown, to a single-activity, fragment-based food-delivery app with a working voucher system.
+**Four standalone Android Studio projects, one repository.**
+From a Compose starter and a ListView vs RecyclerView comparison to a fragment-based food-delivery app and a dedicated Database coursework project.
 
 </div>
 
@@ -29,7 +30,7 @@ From a Compose starter, to a ListView vs RecyclerView showdown, to a single-acti
 
 ## ✨ About
 
-This repository holds the lab tasks and assignments from my **Mobile App Development** course at The Superior University, Lahore. Every folder is a **self-contained Android Studio project** with its own Gradle wrapper, so you can open any one of them directly without touching the others.
+This repository holds the lab tasks and assignments from my **Mobile App Development** course at The Superior University, Lahore. Every project folder is a **self-contained Android Studio project** with its own Gradle configuration, so you can open any one of them directly without touching the others.
 
 The projects are deliberately arranged as a progression:
 
@@ -38,6 +39,7 @@ The projects are deliberately arranged as a progression:
 | 🟢 **1** | Project setup, modern declarative UI with Compose | **MyApplication** |
 | 🔵 **2** | Displaying collections: `ListView` vs `RecyclerView`, custom adapters, data models | **Lists** |
 | 🔴 **3** | A complete app: single-activity architecture, fragment navigation, in-fragment auth flow, shared state, vouchers, adapters, sample data | **Foodie** |
+| 🟣 **4** | Database-focused Android Studio coursework project | **Database** |
 
 ---
 
@@ -81,6 +83,18 @@ Edge-to-edge Compose scaffold with a themed Material 3 setup.
 Best for seeing the modern declarative way to build Android UI.
 
 </td>
+<td width="25%" valign="top">
+
+### 🗄️ Database
+**Database coursework project**
+
+`Android Studio` `Gradle`
+
+A standalone Android Studio project organized in its own folder, with an `app` module and Gradle project configuration.
+
+Best for exploring the database-related coursework implementation.
+
+</td>
 </tr>
 </table>
 
@@ -89,6 +103,7 @@ Best for seeing the modern declarative way to build Android UI.
 | `Foodapp` | Java | XML + Material Components | `com.example.foodapp` | Single-activity shell, Login/Sign-up as fragments, 8-tab navigation, cart singleton, vouchers |
 | `Lists` | Java | XML + Material Components | `com.example.lists` | Two adapters, one dataset, direct comparison |
 | `MyApplication` | Kotlin | Jetpack Compose | `com.example.myapplication` | Compose + Material 3 theming, edge-to-edge |
+| `Database` | To be confirmed | Android Studio project | To be confirmed | Database coursework project; see the `Database/` source folder |
 
 ---
 
@@ -348,6 +363,25 @@ MyApplication/app/src/main/java/com/example/myapplication/
 
 ---
 
+## 🗄️ Database — Android Studio Project
+
+> A fourth, standalone Android Studio project added to the coursework repository. The project includes an `app` module, Gradle wrapper, and Gradle build configuration. The detailed database technology, schema, and implemented operations should be documented here once confirmed from the project source.
+
+### 📁 Project files
+
+```text
+Database/
+├── app/                  Android application module
+├── gradle/               Gradle wrapper configuration
+├── build.gradle.kts      Root Gradle build configuration
+├── gradle.properties     Gradle project properties
+├── gradlew               Gradle wrapper (Unix)
+├── gradlew.bat           Gradle wrapper (Windows)
+└── settings.gradle.kts   Gradle project settings
+```
+
+---
+
 ## 🛠️ Tech Stack
 
 | Area | Technologies |
@@ -370,6 +404,7 @@ mobile-app-development-coursework/
 ├── 🍔 Foodapp/            Food-delivery app (Java + XML + single-activity Fragments)
 ├── 📱 Lists/              ListView vs RecyclerView (Java + XML)
 ├── 🧩 MyApplication/      Jetpack Compose starter (Kotlin)
+├── 🗄️ Database/           Database coursework project (Android Studio)
 └── 📄 README.md
 ```
 
@@ -390,13 +425,13 @@ mobile-app-development-coursework/
 git clone https://github.com/furqanzubair209-cell/mobile-app-development-coursework.git
 
 # 2. Open ONE of the project folders in Android Studio
-#    Foodapp  |  Lists  |  MyApplication
+#    Foodapp  |  Lists  |  MyApplication  |  Database
 ```
 
 3. Wait for the **Gradle sync** to finish.
 4. Pick an emulator or connect a device, then press **▶ Run**.
 
-> 💡 Each folder is its own Gradle project. Open `Foodapp`, `Lists` or `MyApplication` directly, **not** the repository root.
+> 💡 Each folder is its own Gradle project. Open `Foodapp`, `Lists`, `MyApplication` or `Database` directly, **not** the repository root.
 
 ### Try Foodie without Android Studio
 
@@ -411,6 +446,7 @@ Download the debug APK from the **Releases** page, allow *Install unknown apps* 
 - [x] Jetpack Compose starter project
 - [x] ListView vs RecyclerView comparison
 - [x] Multi-screen food-delivery app
+- [x] Database coursework Android Studio project
 - [x] Fragment-based tab navigation for Foodie
 - [x] Refactor Foodie to a single-activity architecture (Login and Sign-up as fragments)
 - [x] Voucher engine with live cart totals
