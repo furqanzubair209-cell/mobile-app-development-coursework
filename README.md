@@ -20,9 +20,9 @@
 ![Repo Size](https://img.shields.io/github/repo-size/furqanzubair209-cell/mobile-app-development-coursework?style=flat-square&color=orange)
 
 **Four standalone Android Studio projects, one repository.**
-A Compose starter, a ListView vs RecyclerView comparison, a fragment-based food-delivery app, and a SQLite-backed student admission app with full CRUD.
+A Compose starter, a ListView vs RecyclerView comparison, a fragment-based food-delivery app, and a SQLite-backed product inventory app with full CRUD, search, filters and a live stock dashboard.
 
-[Projects](#-projects-at-a-glance) · [Foodie](#-foodie--food-delivery-app) · [Lists](#-lists--listview-vs-recyclerview) · [MyApplication](#-myapplication--jetpack-compose-starter) · [Database](#%EF%B8%8F-database--student-admission-app-sqlite) · [Getting Started](#-getting-started)
+[Projects](#-projects-at-a-glance) · [Foodie](#-foodie--food-delivery-app) · [Lists](#-lists--listview-vs-recyclerview) · [MyApplication](#-myapplication--jetpack-compose-starter) · [Database](#%EF%B8%8F-database--apex-inventory-app-sqlite) · [Getting Started](#-getting-started)
 
 </div>
 
@@ -39,7 +39,7 @@ The projects are arranged as a progression:
 | 🟢 **1** | Project setup, modern declarative UI with Compose | **MyApplication** |
 | 🔵 **2** | Displaying collections: `ListView` vs `RecyclerView`, custom adapters, data models | **Lists** |
 | 🔴 **3** | A complete app: single-activity architecture, fragment navigation, in-fragment auth flow, shared state, vouchers | **Foodapp** |
-| 🟣 **4** | Local persistence: SQLite with `SQLiteOpenHelper`, full CRUD, photo picker, form validation | **Database** |
+| 🟣 **4** | Local persistence: SQLite with `SQLiteOpenHelper`, full CRUD, search / filter / sort, live KPI dashboard, photo picker, form validation | **Database** |
 
 ---
 
@@ -50,7 +50,7 @@ The projects are arranged as a progression:
 | 🍔 [`Foodapp`](Foodapp) | Java | XML + Material Components | `com.example.foodapp` | Single-activity shell, Login/Sign-up as fragments, 8-tab navigation, cart singleton, vouchers |
 | 📱 [`Lists`](Lists) | Java | XML + Material Components | `com.example.lists` | Two adapters, one dataset, direct comparison |
 | 🧩 [`MyApplication`](MyApplication) | Kotlin | Jetpack Compose | `com.example.myapplication` | Compose + Material 3 theming, edge-to-edge |
-| 🗄️ [`Database`](Database) | Java | XML + Material Components | `com.example.database` | SQLite CRUD, tabbed fragments, photo picker, validated admission form |
+| 🗄️ [`Database`](Database) | Java | XML + Material Components | `com.example.database` | SQLite CRUD, two-screen fragment shell, live margin calculator, KPI dashboard, search / filter / sort |
 
 <table>
 <tr>
@@ -69,11 +69,11 @@ Single-activity shell · 10 fragments · 6 restaurants · 24 dishes · live sear
 <td width="50%" valign="top">
 
 ### 🗄️ Database
-**Student admission app**
+**Apex Inventory app**
 
 `Java` `SQLite` `Fragments` `Material`
 
-Enroll, view, edit and delete students stored in a local SQLite database, with profile photos and live validation.
+Add, edit, delete, search and filter products in a local SQLite database, with live profit-margin and stock-status feedback and a KPI dashboard.
 
 *Best for seeing how persistence works end to end.*
 
@@ -362,68 +362,89 @@ MyApplication/app/src/main/java/com/example/myapplication/
 
 ---
 
-## 🗄️ Database — Student Admission App (SQLite)
+## 🗄️ Database — Apex Inventory App (SQLite)
 
-> A student admission manager backed by a local **SQLite** database (`Admission.db`) through a hand-written `SQLiteOpenHelper`. A single `MainActivity` hosts two fragments behind a `TabLayout`: an **Admission Form** for enrolling and editing students, and a **Database Records** screen that lists every student as a card. It covers the full **Create, Read, Update, Delete** cycle with no ORM and no backend.
+> A product inventory manager backed by a local **SQLite** database (`ProductCatalog.db`) through a hand-written `SQLiteOpenHelper`. A single `MainActivity` hosts two fragments behind a two-button top switcher: a **Product Form** for adding and editing stock, and an **Inventory Dashboard** with live KPI cards, search, filters, sorting and a card for every product. It covers the full **Create, Read, Update, Delete** cycle with no ORM and no backend.
 
 ### 🎯 Features
 
-- 📝 **Admission form** with name, email, phone and password fields in Material `TextInputLayout`s, plus a degree-program dropdown, a gender radio group, specialization checkboxes and a confirmation checkbox
-- ✅ **Inline validation**: required fields, `Patterns.EMAIL_ADDRESS` email check, degree selection and a terms checkbox that must be ticked before enrollment
-- ➕ **Insert**: "Enroll" saves a new student, clears the form and jumps to the Records tab
-- ✏️ **Update**: tap a card (or its edit icon) and the form opens pre-filled through a fragment `Bundle`; change fields and update by student ID
+- 📝 **Four-section product form**: **A** product information (name, SKU, category, brand, description), **B** pricing and financials, **C** inventory management, **D** lifecycle status
+- ✨ **SKU generator** that builds a code from the chosen category (for example `SKU-ELE-4821`), plus a case-insensitive **unique SKU check** on save and update
+- 💰 **Live margin analytics**: unit profit, gross margin and effective price (after discount) recalculate as you type, with a **negative / low / healthy** margin badge (low is under 15%)
+- 📦 **Live stock badge**: **In Stock**, **Low Stock** or **Out of Stock** is computed from quantity and the low-stock threshold (default `5`) and stored with the product
+- 🔁 **Lifecycle status**: Active, Inactive or Discontinued
+- ✅ **Inline validation**: required name, SKU, category, cost and selling price, selling price above `$0`, discount between 0% and 100%, and non-negative stock
+- ⚡ **Quick actions bar** on the form with icon-only buttons: Save, Update, Delete, View and Clear
+- ➕ **Insert**: Save adds the product, clears the form and jumps to the dashboard
+- ✏️ **Update**: tap a card (or its edit icon) and the form opens pre-filled through a fragment `Bundle`, with an **edit-mode banner** showing the date added and last updated
 - 🗑️ **Delete**: from the form by ID, or straight from a card, both behind a `MaterialAlertDialogBuilder` confirmation
-- 📷 **Profile photo picker** using `ActivityResultContracts.GetContent`, with the image URI stored in the database and a persistable read permission requested
-- 🪪 **Student cards** showing an avatar (photo or initial), ID chip, email and colored pills for gender, course, department and specialization
-- 🔢 **Live counters** for total students, and an **empty state** with a shortcut back to the form
-- 🎨 **Indigo and cyan Material styling** with gradient headers, vector icons and a day/night theme pair
+- 📷 **Product photo picker** using `ActivityResultContracts.GetContent`, with the image URI stored in the database and a persistable read permission requested
+- 📊 **KPI dashboard**: total and active products, inventory value at cost with the retail value beside it, low-stock count and out-of-stock count
+- 🔍 **Live search** across name, SKU, brand, supplier and barcode
+- 🎛️ **Filters and sorting**: category (10 categories), stock status, and sort by newest, price low to high, price high to low, stock low to high or name A-Z
+- 🪪 **Product cards** showing a thumbnail (photo or initial), ID chip, brand and supplier, availability and status badges, SKU, category, stock units, selling price, cost and profit margin
+- 🫥 **Two empty states**: an empty inventory (with a shortcut to the form) and no matches for the current filters (with a **Clear Filters** button)
+- 🌱 **Seed data**: a fresh install starts with 4 sample products (headphones, laptop, running shoes and a mouse) covering in-stock, low-stock and out-of-stock cases
+- 🎨 **Midnight navy and indigo styling** with emerald, amber and rose status colors, gradient headers, vector icons and a day/night theme pair
 
 ### 🧱 Database Schema
 
-**Database:** `Admission.db` · **Version:** `5` · **Table:** `students`
+**Database:** `ProductCatalog.db` · **Version:** `7` · **Table:** `products`
 
 | Column | Type | Notes |
 |---|---|---|
 | `id` | `INTEGER` | `PRIMARY KEY AUTOINCREMENT` |
-| `username` | `TEXT` | Student full name |
-| `email` | `TEXT` | Validated on the form |
-| `phone` | `TEXT` | Contact number |
-| `password` | `TEXT` | See [Known limitations](#-known-limitations) |
-| `gender` | `TEXT` | `Male` · `Female` · `Other` |
-| `course` | `TEXT` | One of 6 degree programs (BSCS, BSSE, BSAI, BSDS, Cyber Security, BSIT) |
-| `facilities` | `TEXT` | Comma-separated specializations: Web Dev, AI & ML, Mobile App, Cyber & Cloud (default `General Tech`) |
-| `department` | `TEXT` | Currently set to `Information Tech` by the form |
-| `image_uri` | `TEXT` | Profile photo URI from the picker |
+| `name` | `TEXT` | `NOT NULL` |
+| `sku` | `TEXT` | `UNIQUE NOT NULL`, also checked case-insensitively in code |
+| `barcode` | `TEXT` | Optional |
+| `category` | `TEXT` | `NOT NULL`, one of 10 categories (Electronics, Computers & Tech, Fashion & Apparel, Home & Living, Health & Beauty, Sports & Fitness, Toys & Hobbies, Groceries & Food, Automotive, Books & Media) |
+| `brand` | `TEXT` | Optional |
+| `description` | `TEXT` | Optional |
+| `purchase_price` | `REAL` | `NOT NULL`, cost per unit |
+| `selling_price` | `REAL` | `NOT NULL`, price per unit |
+| `discount_percent` | `REAL` | Default `0.0` |
+| `stock_quantity` | `INTEGER` | `NOT NULL DEFAULT 0` |
+| `low_stock_threshold` | `INTEGER` | `NOT NULL DEFAULT 5` |
+| `supplier` | `TEXT` | Optional |
+| `status` | `TEXT` | `NOT NULL DEFAULT 'Active'`: `Active` · `Inactive` · `Discontinued` |
+| `availability` | `TEXT` | `NOT NULL`, computed from stock and threshold: `In Stock` · `Low Stock` · `Out of Stock` |
+| `image_uri` | `TEXT` | Product photo URI from the picker |
+| `date_added` | `TEXT` | `NOT NULL`, set on insert (`MMM dd, yyyy`) |
+| `last_updated` | `TEXT` | `NOT NULL`, refreshed on every update |
 
 ### ⚙️ `DatabaseHelper` API
 
 | Method | SQL operation | Returns |
 |---|---|---|
-| `insertStudent(...)` | `INSERT` via `ContentValues` | New row ID, or `-1` on failure |
+| `insertProduct(Product)` | `INSERT` via `ContentValues` | New row ID, or `-1` on failure |
+| `updateProduct(Product)` | `UPDATE ... WHERE id=?` | `true` if a row changed |
+| `deleteProduct(id)` | `DELETE ... WHERE id=?` | `true` if a row was removed |
+| `getProductById(id)` | `SELECT * ... WHERE id=?` | `Product`, or `null` |
+| `getAllProducts(search, category, stockStatus, sortBy)` | Dynamic `SELECT` with `LIKE` search, optional filters and `ORDER BY` | `List<Product>` |
+| `isSkuExists(sku, excludeId)` | `SELECT id ... WHERE LOWER(sku)=LOWER(?) AND id != ?` | `true` if another product already uses the SKU |
+| `getDashboardStats()` | `SELECT` over stock and price columns | `DashboardStats` (totals, low and out-of-stock counts, cost and retail value) |
+| `getRecordsCount()` | `SELECT COUNT(*)` | Total products as `int` |
 | `getAllData()` | `SELECT * ... ORDER BY id DESC` | `Cursor` (newest first) |
-| `updateData(id, ...)` | `UPDATE ... WHERE id=?` | `true` if a row changed |
-| `deleteData(id)` | `DELETE ... WHERE id=?` | `true` if a row was removed |
-| `getRecordsCount()` | `SELECT COUNT(*)` | Total students as `int` |
 
-All writes use `ContentValues` and `?` placeholders, so user input never gets concatenated into SQL.
+Availability is computed in `Product.computeAvailability(...)` on every insert and update, and all search, filter, update and delete values go through `?` placeholders, so user input never gets concatenated into SQL.
 
 ### 🔄 CRUD Flow
 
 ```mermaid
 flowchart LR
-    subgraph UI["MainActivity + TabLayout"]
-        AF[Admission Form tab]
-        RF[Database Records tab]
+    subgraph UI["MainActivity + top switcher"]
+        PF[Product Form]
+        DB2[Inventory Dashboard]
     end
-    DB[(Admission.db<br/>students)]
+    DB[(ProductCatalog.db<br/>products)]
 
-    AF -->|Enroll: insertStudent| DB
-    AF -->|Update: updateData| DB
-    AF -->|Delete: deleteData| DB
-    RF -->|getAllData: render cards| DB
-    RF -->|Quick delete: deleteData| DB
-    RF -->|Tap card: pass Bundle| AF
-    AF -->|After save: navigateToRecords| RF
+    PF -->|Save: insertProduct| DB
+    PF -->|Update: updateProduct| DB
+    PF -->|Delete: deleteProduct| DB
+    DB2 -->|getAllProducts + getDashboardStats| DB
+    DB2 -->|Quick delete: deleteProduct| DB
+    DB2 -->|Tap card: pass Bundle| PF
+    PF -->|After save, update or delete| DB2
 
     style DB fill:#4F46E5,color:#fff,stroke:none
 ```
@@ -432,38 +453,56 @@ flowchart LR
 
 | Concept | Where it shows up |
 |---|---|
-| **SQLiteOpenHelper** | `DatabaseHelper` creates the schema in `onCreate` and handles versioning in `onUpgrade` |
-| **CRUD with parameterized queries** | `ContentValues` for writes, `?` selection args for update and delete |
-| **Cursor handling** | Records are read from a `Cursor` and closed after rendering; count uses try-with-resources |
+| **SQLiteOpenHelper** | `DatabaseHelper` creates the schema and seeds sample products in `onCreate`, and handles versioning in `onUpgrade` |
+| **CRUD with parameterized queries** | `ContentValues` for writes, `?` selection args for update, delete, SKU check and search |
+| **Dynamic query building** | `getAllProducts` assembles the `WHERE` and `ORDER BY` clauses from the search text, filters and sort choice |
+| **Aggregated dashboard data** | `getDashboardStats` walks one cursor to compute counts and cost and retail value into a `DashboardStats` object |
+| **Model layer** | `Product` (`Serializable`) holds the data plus derived values: availability, profit per unit and profit margin |
+| **Cursor handling** | Cursors are opened with try-with-resources so they are always closed |
 | **Single shared helper** | Fragments obtain one `DatabaseHelper` from `MainActivity.getDatabaseHelper()` |
-| **Fragment ↔ activity navigation** | `navigateToRecords()` and `navigateToAdmission(Bundle)` keep the tab selection in sync |
-| **Passing data between fragments** | Student fields travel as a `Bundle` to pre-fill the form for editing |
+| **Fragment ↔ activity navigation** | `navigateToRecords()` and `navigateToAdmission(Bundle)` keep the top switcher in sync with the visible fragment |
+| **Passing data between fragments** | Product fields travel as a `Bundle` to pre-fill the form for editing |
+| **Reactive UI with `TextWatcher`** | Margin analytics, stock badge and live search update as the user types |
 | **Activity Result API** | `registerForActivityResult` with `GetContent` for the photo picker |
 | **Material dialogs and snackbars** | Delete confirmation dialog, color-coded success and error snackbars |
-| **Dynamic list rendering** | Each record inflates `item_student_card.xml` into a container, with gender-based styling |
+| **Dynamic list rendering** | Each product inflates `item_product_card.xml` into a container, with status-based badge colors |
 
 ### 📁 Structure
 
 ```text
 Database/app/src/main/
 ├── java/com/example/database/
-│   ├── MainActivity.java            host activity: TabLayout, fragment swaps, shared DatabaseHelper
-│   ├── DatabaseHelper.java          SQLiteOpenHelper: schema + insert/query/update/delete/count
-│   ├── AdmissionFragment.java       form, validation, photo picker, insert/update/delete actions
-│   └── RecordsFragment.java         student cards, quick edit and quick delete, empty state
+│   ├── MainActivity.java              host activity: top switcher, fragment swaps, shared DatabaseHelper
+│   ├── DatabaseHelper.java            SQLiteOpenHelper: schema, seed data, CRUD, search/filter/sort, stats
+│   ├── Product.java                   model: fields, availability, profit and margin helpers
+│   ├── DashboardStats.java            KPI holder: totals, low/out-of-stock counts, cost and retail value
+│   ├── ProductFormFragment.java       4-section form, validation, live calculators, photo picker, insert/update/delete
+│   └── ProductCatalogFragment.java    KPI cards, search, filters, sorting, product cards, quick edit and delete
 └── res/
-    ├── layout/                      activity_main · fragment_admission · fragment_records · item_student_card
-    ├── drawable/                    vector icons + pill, avatar, chip and gradient backgrounds
-    └── values/                      colors · strings · themes (+ values-night)
+    ├── layout/                        activity_main · fragment_product_form · fragment_product_catalog · item_product_card
+    ├── drawable/                      vector icons + badge, chip, card and gradient backgrounds
+    └── values/                        colors · strings · themes (+ values-night)
 ```
+
+### 🎨 Palette
+
+| Token | Hex | Use |
+|---|---|---|
+| ![#101828](https://img.shields.io/badge/-101828-101828?style=flat-square) `primary_navy` | `#101828` | Headers and primary surfaces |
+| ![#4F46E5](https://img.shields.io/badge/-4F46E5-4F46E5?style=flat-square) `primary_indigo` | `#4F46E5` | Primary accent and gradients |
+| ![#7C3AED](https://img.shields.io/badge/-7C3AED-7C3AED?style=flat-square) `accent_violet` | `#7C3AED` | Secondary accent, status badges |
+| ![#10B981](https://img.shields.io/badge/-10B981-10B981?style=flat-square) `success_emerald` | `#10B981` | In stock, healthy margin |
+| ![#F59E0B](https://img.shields.io/badge/-F59E0B-F59E0B?style=flat-square) `warning_amber` | `#F59E0B` | Low stock, low margin |
+| ![#F43F5E](https://img.shields.io/badge/-F43F5E-F43F5E?style=flat-square) `danger_rose` | `#F43F5E` | Out of stock, negative margin, errors |
 
 ### ⚠️ Known limitations
 
 This is coursework, and these are deliberate gaps rather than hidden ones:
 
-- **Passwords are stored as plain text** in the `password` column. A production app would store a salted hash, or avoid storing passwords locally at all.
-- **`onUpgrade` drops and recreates the table**, so bumping `DATABASE_VERSION` wipes existing records. A real migration would use `ALTER TABLE`.
+- **`onUpgrade` drops and recreates the table**, so bumping `DATABASE_VERSION` wipes existing products and re-seeds the 4 samples. A real migration would use `ALTER TABLE`.
 - **Queries run on the main thread.** That is fine at this scale; Room with background execution would be the next step.
+- **Money is stored as `REAL`** (floating point). A production app would store prices as integer minor units or use `BigDecimal`.
+- **Discounts are informational.** The form shows the effective price after discount, but the dashboard's retail value is calculated from the full selling price.
 
 ---
 
@@ -473,7 +512,7 @@ This is coursework, and these are deliberate gaps rather than hidden ones:
 |---|---|
 | **Languages** | Java 11, Kotlin 2.2 |
 | **UI** | XML layouts, Material Components 1.14, Jetpack Compose, Material 3 |
-| **Navigation** | Single-activity fragment swaps (tab shell and `TabLayout`), explicit intents with extras for detail screens |
+| **Navigation** | Single-activity fragment swaps (Foodapp tab shell, Database two-button switcher), explicit intents with extras for detail screens |
 | **Persistence** | SQLite via `SQLiteOpenHelper` (Database project) |
 | **Lists and data display** | `ListView`, `RecyclerView`, `BaseAdapter`, `RecyclerView.Adapter`, `ViewHolder` |
 | **Patterns** | Singleton, observer (listeners), model/adapter/data separation |
@@ -490,7 +529,7 @@ mobile-app-development-coursework/
 ├── 🍔 Foodapp/            Food-delivery app (Java + XML + single-activity Fragments)
 ├── 📱 Lists/              ListView vs RecyclerView (Java + XML)
 ├── 🧩 MyApplication/      Jetpack Compose starter (Kotlin)
-├── 🗄️ Database/           Student admission app (Java + SQLite CRUD)
+├── 🗄️ Database/           Apex Inventory app (Java + SQLite CRUD)
 └── 📄 README.md
 ```
 
@@ -522,7 +561,7 @@ git clone https://github.com/furqanzubair209-cell/mobile-app-development-coursew
 ### Quick tips per project
 
 - 🍔 **Foodapp:** login and sign-up are **client-side only**, so any valid-looking email and a password of 4+ characters will sign you in. Try the vouchers `FOODIE50`, `BURGER20` and `FREEDEL` from the **Offers** tab.
-- 🗄️ **Database:** enroll a student on the **Admission Form** tab, then open **Database Records**. Tap any card to load it back into the form for editing. Data lives in the app's private storage, so clearing app data or uninstalling resets it.
+- 🗄️ **Database:** the app opens with 4 seeded products. Add one on the **Product Form** screen, then open the **Inventory Dashboard** to search, filter and sort. Tap any card to load it back into the form for editing. Data lives in the app's private storage, so clearing app data or uninstalling resets it.
 
 ---
 
@@ -531,13 +570,13 @@ git clone https://github.com/furqanzubair209-cell/mobile-app-development-coursew
 - [x] Jetpack Compose starter project
 - [x] ListView vs RecyclerView comparison
 - [x] Multi-screen food-delivery app
-- [x] SQLite-backed student admission app with full CRUD
+- [x] SQLite-backed product inventory app with full CRUD
 - [x] Fragment-based tab navigation for Foodie
 - [x] Refactor Foodie to a single-activity architecture (Login and Sign-up as fragments)
 - [x] Voucher engine with live cart totals
 - [ ] Persist Foodie's cart, orders and login locally (Room or SharedPreferences)
-- [ ] Migrate the Database app to Room, hash stored passwords and add proper schema migrations
-- [ ] Add search and filtering to the student records screen
+- [x] Inventory dashboard with KPI cards, search, filters and sorting
+- [ ] Migrate the Database app to Room and add proper schema migrations
 - [ ] Replace sample data with a remote API
 - [ ] Add UI tests for the Foodie order flow
 - [ ] Upcoming lab tasks and assignments
