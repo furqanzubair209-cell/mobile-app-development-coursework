@@ -1,3 +1,161 @@
 <resources>
-    <string name="app_name">Database</string>
+    <string name="app_name">Apex Inventory</string>
+    <string name="portal_title">Apex Inventory</string>
+    <string name="portal_subtitle">Product Management &amp; Stock System</string>
+    <string name="badge_pro">PRO</string>
+
+    <!-- Navigation Buttons -->
+    <string name="btn_nav_form">Product Form</string>
+    <string name="btn_nav_dashboard">Inventory Dashboard</string>
+
+    <!-- Header Titles -->
+    <string name="desc_apex_logo">Apex Inventory Logo</string>
+    <string name="desc_box_logo">Box Logo</string>
+    <string name="studio_title">Product Management Studio</string>
+    <string name="studio_subtitle">Create, edit, and audit inventory items</string>
+    <string name="dashboard_title">Inventory Dashboard</string>
+    <string name="dashboard_subtitle">Real-time stock valuation &amp; audit</string>
+    <string name="catalog_subtitle">Product Catalog &amp; Stock Records</string>
+
+    <!-- Form Section Titles -->
+    <string name="title_section_a">Section A — Product Information</string>
+    <string name="title_section_b">Section B — Pricing &amp; Financials</string>
+    <string name="title_section_c">Section C — Inventory Management</string>
+    <string name="title_section_d">Section D — Product Lifecycle Status</string>
+
+    <string name="badge_general">General</string>
+    <string name="badge_financials">Financials</string>
+
+    <!-- Form Labels & Hints -->
+    <string name="label_product_photo">Product Thumbnail / Image</string>
+    <string name="status_no_image">No image selected (default placeholder)</string>
+    <string name="status_custom_photo">Custom photo attached</string>
+    <string name="status_default_photo">Default image placeholder</string>
+    <string name="btn_choose_photo">Choose</string>
+    <string name="btn_remove_photo">Remove</string>
+
+    <string name="hint_product_id">Product ID (for Update / Delete)</string>
+    <string name="helper_product_id">Leave blank for new products, or enter/select ID to update or delete</string>
+
+    <string name="hint_product_name">Product Name *</string>
+    <string name="hint_product_sku">SKU / Product Code *</string>
+    <string name="helper_product_sku">Unique inventory identifier</string>
+    <string name="btn_generate">GENERATE</string>
+
+    <string name="hint_category">Category *</string>
+    <string name="hint_brand">Brand / Manufacturer</string>
+    <string name="hint_description">Product Description</string>
+
+    <string name="hint_cost_price">Cost Price ($) *</string>
+    <string name="hint_selling_price">Selling Price ($) *</string>
+    <string name="hint_discount_percent">Promotional Discount (%)</string>
+    <string name="helper_discount">Optional promo discount applied at checkout</string>
+
+    <string name="label_financial_analytics">Live Margin &amp; Profit Analytics</string>
+    <string name="margin_healthy">Healthy Margin</string>
+    <string name="margin_low">Low Margin</string>
+    <string name="margin_negative">Negative Margin</string>
+    <string name="label_unit_profit">Unit Profit</string>
+    <string name="label_gross_margin">Gross Margin</string>
+    <string name="label_effective_price">Effective Price</string>
+
+    <string name="hint_stock_quantity">Stock Quantity *</string>
+    <string name="hint_low_stock_threshold">Low Stock Alert</string>
+    <string name="helper_low_stock">Trigger alert (Default 5)</string>
+    <string name="hint_supplier">Supplier / Vendor Name</string>
+    <string name="hint_barcode">Barcode / UPC (Optional)</string>
+
+    <!-- Lifecycle Status -->
+    <string name="status_active">Active</string>
+    <string name="status_inactive">Inactive</string>
+    <string name="status_discontinued">Discontinued</string>
+    <string name="status_in_stock">In Stock</string>
+    <string name="status_low_stock">Low Stock</string>
+    <string name="status_out_of_stock">Out of Stock</string>
+
+    <!-- Action Bar & Buttons -->
+    <string name="label_quick_actions">Quick Actions Bar</string>
+    <string name="label_quick_actions_sub">Save • Update • Delete • View • Clear</string>
+
+    <string name="action_save_product">Save / Enroll Product</string>
+    <string name="action_update_product">Update Product</string>
+    <string name="action_delete_product">Delete Product</string>
+    <string name="action_view_catalog">View Inventory Catalog</string>
+    <string name="action_clear_form">Clear Form</string>
+    <string name="btn_cancel_edit">Cancel Edit</string>
+
+    <!-- Dashboard & Catalog -->
+    <string name="title_inventory_dashboard">Inventory Dashboard</string>
+    <string name="subtitle_inventory_dashboard">Real-time stock valuation &amp; audit</string>
+    <string name="kpi_total_items">Total Items</string>
+    <string name="kpi_cost_value">Total Cost Value</string>
+    <string name="kpi_low_stock">Low Stock</string>
+    <string name="kpi_out_of_stock">Out of Stock</string>
+    <string name="kpi_needs_restock">Needs Restock</string>
+
+    <string name="count_products_placeholder">0 Products</string>
+    <string name="kpi_zero">0</string>
+    <string name="kpi_zero_active">0 Active</string>
+    <string name="kpi_zero_currency">$0.00</string>
+    <string name="kpi_retail_zero">Retail: $0.00</string>
+    <string name="kpi_zero_units_left">0 Units Left</string>
+
+    <string name="hint_search">Search by name, SKU, brand, supplier&#8230;</string>
+    <string name="hint_filter_category">Category</string>
+    <string name="hint_filter_stock_status">Stock Status</string>
+    <string name="hint_sort_by">Sort By</string>
+
+    <string name="title_product_catalog">Product Catalog</string>
+    <string name="showing_zero_products">Showing 0 products</string>
+    <string name="desc_empty_catalog">Empty Catalog</string>
+    <string name="title_no_products">No Products Found</string>
+    <string name="subtitle_no_products">No products match your current search and filter criteria.</string>
+    <string name="btn_add_first_product">ADD FIRST PRODUCT</string>
+
+    <string name="desc_product_photo">Product Photo</string>
+    <string name="desc_edit_product">Edit Product</string>
+    <string name="desc_delete_product">Delete Product</string>
+
+    <!-- Card Default Strings -->
+    <string name="card_default_initial">P</string>
+    <string name="card_default_id">#1</string>
+    <string name="card_default_category">Electronics</string>
+    <string name="card_default_stock">24 in stock</string>
+    <string name="card_default_product_name">Sony WH-1000XM5</string>
+    <string name="card_default_brand">Sony • Electronics</string>
+    <string name="card_default_sku">SKU-1001</string>
+    <string name="card_label_retail">Retail</string>
+    <string name="card_label_cost">Cost</string>
+    <string name="card_label_margin">Margin</string>
+    <string name="card_default_margin_value">+45.0%</string>
+
+    <!-- Messages -->
+    <string name="msg_form_cleared">Form Cleared</string>
+    <string name="msg_exited_edit">Exited Edit Mode</string>
+    <string name="msg_image_removed">Image removed</string>
+
+    <!-- Format Strings -->
+    <string name="format_sku_generated">✨ Generated unique code: %1$s</string>
+    <string name="format_editing_product_title">Editing Product #%1$d: %2$s</string>
+    <string name="format_editing_product_dates">Added: %1$s | Last updated: %2$s</string>
+    <string name="format_kpi_active">%1$d Active</string>
+    <string name="format_kpi_products_count">%1$d Products</string>
+    <string name="format_kpi_units_left">%1$d Units Left</string>
+    <string name="format_showing_products">Showing %1$d products</string>
+    <string name="format_retail_value">Retail: %1$s</string>
+    <string name="format_unit_price_stock">🏷️ %1$s  |  Stock: %2$s units</string>
+    <string name="format_brand_supplier">%1$s • %2$s</string>
+    <string name="format_profit_margin">+%1$s%% (%2$s)</string>
+    <string name="desc_section_icon">Section Icon</string>
+    <string name="desc_logo_header">Logo Header</string>
+    <string name="title_no_matching_products">No Matching Products</string>
+    <string name="subtitle_no_matching_products">Try clearing your search query or choosing different filters.</string>
+    <string name="title_inventory_is_empty">Inventory Is Empty</string>
+    <string name="subtitle_inventory_is_empty">No products recorded yet. Create your first product to start tracking stock.</string>
+    <string name="btn_clear_filters">CLEAR FILTERS</string>
+    <string name="format_product_id_badge">#%1$d</string>
+    <string name="format_low_stock_units">Low stock: %1$d left!</string>
+    <string name="format_zero_units_left">0 units left</string>
+    <string name="format_in_stock_units">%1$d in stock</string>
+    <string name="msg_standard_product">Standard Product</string>
 </resources>

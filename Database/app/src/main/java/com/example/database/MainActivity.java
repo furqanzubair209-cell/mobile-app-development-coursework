@@ -9,12 +9,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.button.MaterialButton;
 
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseHelper databaseHelper;
-    private TabLayout tabLayout;
+    private MaterialButton btnNavProductForm, btnNavDashboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,29 +29,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         databaseHelper = new DatabaseHelper(this);
-        tabLayout = findViewById(R.id.tabLayout);
 
-        // Tab selection listener
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 0) {
-                    loadFragment(AdmissionFragment.newInstance());
-                } else if (tab.getPosition() == 1) {
-                    loadFragment(RecordsFragment.newInstance());
-                }
-            }
+        btnNavProductForm = findViewById(R.id.btnNavProductForm);
+        btnNavDashboard = findViewById(R.id.btnNavDashboard);
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {}
+        // Top Bar Switcher Button Listeners
+        btnNavProductForm.setOnClickListener(v -> selectProductFormTab(null));
+        btnNavDashboard.setOnClickListener(v -> selectDashboardTab());
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {}
-        });
-
-        // Load Admission Form by default
+        // Load Product Form by default
         if (savedInstanceState == null) {
-            loadFragment(AdmissionFragment.newInstance());
+            selectProductFormTab(null);
         }
     }
 
@@ -62,6 +50,38 @@ public class MainActivity extends AppCompatActivity {
         return databaseHelper;
     }
 
+    public void selectProductFormTab(Bundle args) {
+        ProductFormFragment fragment = ProductFormFragment.newInstance();
+        if (args != null) {
+            fragment.setArguments(args);
+        }
+        loadFragment(fragment);
+
+        if (btnNavProductForm != null && btnNavDashboard != null) {
+            btnNavProductForm.setBackgroundTintList(getColorStateList(R.color.white));
+            btnNavProductForm.setTextColor(getColor(R.color.primary_navy));
+            btnNavProductForm.setIconTint(getColorStateList(R.color.primary_navy));
+
+            btnNavDashboard.setBackgroundTintList(null);
+            btnNavDashboard.setTextColor(getColor(R.color.white));
+            btnNavDashboard.setIconTint(getColorStateList(R.color.white));
+        }
+    }
+
+    public void selectDashboardTab() {
+        loadFragment(ProductCatalogFragment.newInstance());
+
+        if (btnNavProductForm != null && btnNavDashboard != null) {
+            btnNavDashboard.setBackgroundTintList(getColorStateList(R.color.white));
+            btnNavDashboard.setTextColor(getColor(R.color.primary_navy));
+            btnNavDashboard.setIconTint(getColorStateList(R.color.primary_navy));
+
+            btnNavProductForm.setBackgroundTintList(null);
+            btnNavProductForm.setTextColor(getColor(R.color.white));
+            btnNavProductForm.setIconTint(getColorStateList(R.color.white));
+        }
+    }
+
     private void loadFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
@@ -70,27 +90,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Switch to Database Records Fragment Tab
+     * Switch to Product Catalog / Dashboard Fragment
      */
     public void navigateToRecords() {
-        if (tabLayout != null && tabLayout.getTabAt(1) != null) {
-            tabLayout.getTabAt(1).select();
-        } else {
-            loadFragment(RecordsFragment.newInstance());
-        }
+        selectDashboardTab();
     }
 
     /**
-     * Switch to Admission Form Fragment Tab (with optional bundle data for editing)
+     * Switch to Product Form Fragment (with optional pre-filled product bundle data for editing)
      */
-    public void navigateToAdmission(Bundle studentData) {
-        AdmissionFragment fragment = AdmissionFragment.newInstance();
-        if (studentData != null) {
-            fragment.setArguments(studentData);
-        }
-        loadFragment(fragment);
-        if (tabLayout != null && tabLayout.getTabAt(0) != null) {
-            tabLayout.getTabAt(0).select();
-        }
+    public void navigateToAdmission(Bundle productData) {
+        selectProductFormTab(productData);
     }
 }
